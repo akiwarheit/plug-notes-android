@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+  xmlns:android="http://schemas.android.com/apk/res/android">
+  <item android:id="@+id/doodle_grid"
+          android:icon="@drawable/color_grid_4"
+          android:title="@string/color" />
+  <item android:id="@+id/doodle_undo"
+          android:icon="@drawable/remove_1"
+          android:title="@string/undo" />
+  <item android:id="@+id/doodle_redo"
+          android:icon="@drawable/redo_4"
+          android:title="@string/redo" />        
+  <item android:id="@+id/doodle_clear"
+          android:icon="@drawable/remove_1"
+          android:title="@string/clear" />   
+   <item android:id="@+id/doodle_save"
+          android:icon="@drawable/save_1"
+          android:title="@string/save" />
+   <item android:id="@+id/doodle_openfile"
+          android:icon="@drawable/open_1"
+          android:title="@string/open" />   
+</menu>

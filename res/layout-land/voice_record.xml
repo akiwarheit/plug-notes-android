@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent" 
+  android:orientation="horizontal">
+    <LinearLayout
+     android:layout_height="fill_parent" 
+     android:id="@+id/linearLayout1" 
+	android:orientation="vertical"
+	 android:layout_weight="1" 
+	 android:layout_width="0dp">
+	 <TextView 
+    android:text="Recognized Texts" 
+    android:id="@+id/textView1" 
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content">
+    </TextView>
+	 <ListView 
+    android:layout_height="fill_parent" 
+    android:id="@+id/wordsList" 
+    android:layout_width="fill_parent">
+    </ListView>
+	</LinearLayout>    
+	 <LinearLayout
+     android:layout_height="fill_parent" 
+     android:id="@+id/linearLayout1" 
+	android:orientation="vertical"
+	 android:layout_weight="1" 
+	 android:layout_width="0dp">
+	 <Button 
+	 android:text="Speak" 
+	 android:id="@+id/speak_button" 
+	 android:layout_width="wrap_content" 
+	 android:layout_height="wrap_content">
+	 </Button>
+	</LinearLayout>  
+</LinearLayout>

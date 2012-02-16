@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent"
+  android:orientation="vertical"
+  android:layout_gravity="bottom"
+   android:background="@drawable/backrepeat" >
+<!--   android:background="@drawable/backgroundnogradient"> -->
+
+  <LinearLayout
+    android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:gravity="center|center_horizontal"
+	android:layout_gravity="center_horizontal"
+	android:layout_marginTop="20dp"
+	android:layout_marginBottom="5dp"
+	android:background="@drawable/plugnotes_logo_2">
+	</LinearLayout>	
+	<LinearLayout
+      android:id="@+id/LoginPage"
+      android:layout_height="wrap_content"
+      android:layout_width="fill_parent"
+      android:orientation="vertical"       
+      android:gravity="center|center_vertical" 	
+      android:layout_gravity="center_vertical|center_horizontal|center"
+      >    
+      <LinearLayout
+	    android:orientation="vertical"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:gravity="center|center_vertical" 	
+    	android:layout_gravity="center_vertical|center_horizontal|center"    		
+    	android:paddingTop="20dp"
+		android:paddingRight="20dp"
+		android:paddingLeft="20dp"
+		android:paddingBottom="10dp"
+		android:background="@drawable/header"
+    	>
+    	<EditText
+		  android:id="@+id/login_username"
+		  android:hint="username"
+		  android:textColorHint="#4d7b00"
+		  android:layout_width="fill_parent"
+		  android:layout_height="wrap_content"
+		  android:singleLine="true"
+		  android:clickable="true"
+		  android:editable="true"
+		  android:typeface="serif"
+		  />
+    	<EditText
+	 	  android:id="@+id/login_password"
+		  android:hint="••••••••"
+		  android:textColorHint="#4d7b00"
+		  android:password="true"
+		  android:layout_width="fill_parent"
+		  android:layout_height="wrap_content"
+		  android:singleLine="true"
+		  android:clickable="true"
+		  android:editable="true"	
+		  android:typeface="serif" 
+		  />
+      </LinearLayout>
+      
+      <LinearLayout
+  		android:layout_width="fill_parent"
+    	android:layout_height="wrap_content"
+    	android:layout_weight="2"
+    	android:orientation="horizontal"
+    	android:paddingBottom="25dp"
+    	android:paddingLeft="20dp"
+    	android:paddingRight="20dp"
+   		android:gravity="right"
+   		android:weightSum="4"
+   		> 			
+<!-- 		<TextView -->
+<!-- 		  android:id="@+id/register" -->
+<!-- 	   	  android:text="Register" -->
+<!-- 	   	  android:typeface="serif" -->
+<!-- 	   	  android:textColor="#4d7b00" -->
+<!-- 		  android:gravity="right" -->
+<!-- 	   	  android:layout_gravity="center_vertical" -->
+<!-- 	   	  android:layout_width="wrap_content" -->
+<!-- 	   	  android:layout_height="wrap_content" -->
+<!-- 	   	  android:layout_weight="1" -->
+<!-- 	   	  android:layout_marginRight="5dp" -->
+<!-- 	   	  android:textSize="10dp" -->
+<!-- 	   	  /> -->
+
+          <CheckBox
+              android:id="@+id/dev_checkbox"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_weight="1"
+              android:textColor="#000000"
+              android:text="DevMode" />
+
+		<Button
+	 	  android:id="@+id/login_buttonLogin"
+	 	  android:text="Login"
+	 	  android:typeface="serif"
+	 	  android:textColor="#4d7b00"
+		  android:layout_height="wrap_content"
+		  android:layout_width="wrap_content"
+		  android:layout_weight="1"
+		  >		    
+		  </Button>
+ 	  </LinearLayout>
+   </LinearLayout>
+</LinearLayout>

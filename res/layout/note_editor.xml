@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent"
+  android:orientation="vertical"
+  android:layout_gravity="bottom"
+  android:background="@color/white"
+  android:id="@+id/create_note"
+  >      
+
+<RelativeLayout
+        android:id="@+id/home_header_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:background="@drawable/strip">
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="60px"
+            android:layout_height="60px"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="1dp"
+            android:src="@drawable/plug_icon_green_small" />
+        
+
+        <RelativeLayout
+            android:id="@+id/home_header_buttons"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="1dp"
+            android:layout_toRightOf="@+id/imageView1" 
+            android:layout_marginRight="1dp" 
+            android:layout_alignParentRight="true">
+
+            <ImageButton
+                android:id="@+id/imgbttn_header_sign_out"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="2dp"
+                android:src="@drawable/logout" />
+
+            <ImageButton
+                android:id="@+id/imgbttn_header_camera"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/camera2" 
+                android:layout_toLeftOf="@id/imgbttn_header_sign_out" android:layout_marginRight="3dp"/>
+
+            <ImageButton
+                android:id="@+id/imgbttn_header_attachment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/attach2" 
+                android:layout_toLeftOf="@id/imgbttn_header_camera"/>
+
+            <ImageButton
+                android:id="@+id/imgbttn_header_home"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/imgbttn_header_attachment"
+                android:src="@drawable/home" />
+
+        </RelativeLayout>
+        
+    </RelativeLayout>
+
+  <LinearLayout
+    android:layout_height="wrap_content"
+	android:layout_width="fill_parent"
+	android:layout_weight="2"
+	android:orientation="vertical"       
+	android:layout_gravity="center_vertical|center_horizontal|center"
+	android:background="@drawable/backgroundnogradient" 
+	>
+	<EditText
+      android:id="@+id/note_title" 
+      android:layout_width="fill_parent" 
+      android:layout_height="wrap_content" 
+      android:background="@color/white"
+      android:maxLines="1"
+      android:lines="1"
+      android:textSize="18sp"
+      android:hint="@string/note_title"
+      android:capitalize="words"
+      >
+    </EditText>
+      <view
+        class="com.plug.note.NoteEditorActivity$PLUGEditText"
+		android:id="@+id/note"
+		android:hint="@string/note_content"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:background="@android:color/white"
+		android:scrollbars="vertical"
+		android:fadingEdge="vertical"
+		android:gravity="top"
+		android:textSize="18sp"
+		android:capitalize="sentences"
+		/>        
+  </LinearLayout>
+  </LinearLayout>
+ 

@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent"
+  android:orientation="vertical"
+  android:layout_gravity="bottom"
+  android:background="@color/white"
+  >
+  <LinearLayout
+    android:layout_height="wrap_content"
+	android:layout_width="fill_parent"
+	android:orientation="horizontal"
+	android:background="@drawable/strip"	
+	>        
+	<ImageView
+	  android:id="@+id/home_logo"
+	  android:src="@drawable/plug_head_1"
+	  android:layout_width="wrap_content"
+	  android:layout_height="wrap_content"
+	  android:paddingLeft="5dp"
+	  android:paddingTop="3dp"
+	  android:paddingBottom="3dp"
+	  android:layout_gravity="left"
+	  >
+	  </ImageView>
+  </LinearLayout>
+<!--   <LinearLayout -->
+<!--     android:layout_height="wrap_content" -->
+<!-- 	android:layout_width="fill_parent" -->
+<!-- 	android:orientation="horizontal" -->
+<!-- 	android:background="@drawable/strip"	 -->
+<!-- 	>         -->
+<!-- 	<ImageView -->
+<!-- 	  android:id="@+id/home_logo" -->
+<!-- 	  android:src="@drawable/plug_word" -->
+<!-- 	  android:layout_width="wrap_content" -->
+<!-- 	  android:layout_height="wrap_content" -->
+<!-- 	  android:layout_gravity="left" -->
+<!-- 	  > -->
+<!-- 	  </ImageView> -->
+	  
+<!-- 	<LinearLayout  -->
+<!-- 	  android:layout_height="wrap_content" -->
+<!-- 	  android:layout_width="fill_parent" -->
+<!-- 	  android:orientation="horizontal" -->
+<!-- 	  android:gravity="right" -->
+<!-- 	  >     -->
+<!-- 	  <ImageView -->
+<!-- 	    android:id="@+id/home_icon" -->
+<!-- 	    android:src="@drawable/home" -->
+<!-- 	    android:paddingTop="10px" -->
+<!-- 	    android:paddingBottom="10px"  -->
+<!-- 	    android:paddingRight="10px"  -->
+<!-- 	    android:layout_width="wrap_content" -->
+<!-- 	    android:layout_height="wrap_content"	   -->
+<!-- 	    > -->
+<!-- 	    </ImageView> -->
+<!-- 	  <ImageView -->
+<!-- 	    android:id="@+id/home_icon" -->
+<!-- 	    android:src="@drawable/home" -->
+<!-- 	    android:paddingTop="10px" -->
+<!-- 	    android:paddingBottom="10px"  -->
+<!-- 	    android:paddingRight="10px"  -->
+<!-- 	    android:layout_width="wrap_content" -->
+<!-- 	    android:layout_height="wrap_content"	  -->
+<!-- 	    > -->
+<!-- 	    </ImageView> -->
+<!--     </LinearLayout>	     -->
+<!-- 	<TextView -->
+<!-- 	  android:id="@+id/home_username" -->
+<!-- 	  android:text="This is User Name." -->
+<!-- 	  android:textColor="@color/white" -->
+<!-- 	  android:gravity="right" -->
+<!-- 	  android:layout_gravity="center_vertical" -->
+<!-- 	  android:paddingTop="10px" -->
+<!-- 	  android:paddingBottom="10px"  -->
+<!-- 	  android:paddingRight="10px"  -->
+<!-- 	  android:layout_width="fill_parent" -->
+<!-- 	  android:layout_height="wrap_content" -->
+<!-- 	  android:layout_weight="1" /> -->
+<!--   </LinearLayout> -->
+  
+  <LinearLayout
+    android:layout_height="wrap_content"
+	android:layout_width="fill_parent"
+	android:orientation="horizontal"
+	android:background="@drawable/pagetitle">
+	
+<!-- 	Page title -"Doodle" -->
+	<TextView
+      android:id="@+id/doodle_page"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:layout_weight="1"
+      android:gravity="left"
+      android:paddingBottom="10dp"
+      android:paddingLeft="5dp"
+      android:paddingTop="10dp"
+      android:text="@string/doodle_page"
+      android:textColor="@color/black2"
+      android:textStyle="bold" />
+  </LinearLayout>
+  <LinearLayout
+    android:layout_height="wrap_content"
+	android:layout_width="fill_parent"
+	android:layout_weight="2"
+	android:orientation="horizontal"       
+	android:layout_gravity="center_vertical|center_horizontal|center"
+	android:background="@color/white"	
+	>
+	
+<!--     part where you can doodle or draw -->
+	<com.plug.doodle.DoodleView
+	  android:id="@+id/doodle_view"
+	  android:layout_width="fill_parent" 
+	  android:layout_height="fill_parent"/>
+  </LinearLayout>
+  <LinearLayout
+    android:layout_height="wrap_content"
+	android:layout_width="fill_parent"
+	android:orientation="horizontal"
+	android:layout_gravity="bottom"
+	android:paddingTop="5dp"
+	android:paddingBottom="5dp"
+	>
+      
+      <LinearLayout
+	    android:layout_height="wrap_content"
+	    android:layout_width="fill_parent"
+	    android:orientation="horizontal"
+	    android:layout_gravity="bottom"
+	    >               
+
+<!-- save doodle button -->
+        <ImageButton
+          android:id="@+id/imageView2"
+          android:layout_width="fill_parent"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:src="@drawable/camera2"       
+          />               
+          
+<!--           clear doodle button -->
+        <ImageButton
+          android:id="@+id/imageView2"
+          android:layout_width="fill_parent"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:src="@drawable/attach2"      
+          />
+      </LinearLayout>      
+  </LinearLayout>
+</LinearLayout>
+
+<!-- <?xml version="1.0" encoding="utf-8"?> -->
+
+<!-- <LinearLayout  -->
+<!-- 	xmlns:android="http://schemas.android.com/apk/res/android" -->
+<!-- 	android:orientation="vertical" -->
+<!-- 	android:layout_width="fill_parent"  -->
+<!-- 	android:layout_height="fill_parent" -->
+	
+<!-- 	> -->
+<!-- <LinearLayout -->
+<!-- 			android:background="@color/white" -->
+<!-- 			android:layout_width="fill_parent" -->
+<!-- 		 	android:layout_height="fill_parent"> -->
+			
+<!-- 		<com.plug.doodle.DoodleView -->
+<!-- 	 		android:id="@+id/doodle_view" -->
+<!-- 			android:layout_width="fill_parent"  -->
+<!-- 			android:layout_height="fill_parent"/> -->
+	
+<!-- 	</LinearLayout> -->
+<!-- </LinearLayout> -->

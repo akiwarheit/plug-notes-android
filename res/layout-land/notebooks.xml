@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent"
+  android:orientation="vertical"
+  android:layout_gravity="bottom"
+  android:background="@color/white"
+  >
+  <LinearLayout
+  	android:layout_height="wrap_content"
+	android:layout_width="fill_parent"
+	android:orientation="horizontal"
+	android:background="@drawable/strip"
+	>        
+	
+	<ImageView
+	  android:id="@+id/home_logo"
+	  android:src="@drawable/plug_head_2"
+	  android:layout_width="wrap_content"
+	  android:layout_height="wrap_content"
+	  android:paddingLeft="9dp"
+	  android:paddingTop="3dp"
+	  android:paddingBottom="3dp"
+	  android:layout_gravity="left"
+	  >
+	  </ImageView>
+	  <LinearLayout 
+	  android:layout_height="wrap_content"
+	  android:layout_width="fill_parent"
+	  android:orientation="horizontal"
+	  android:gravity="right"
+	  android:paddingTop="5dp"
+	  android:paddingBottom="5dp"
+	  >
+	<TextView
+      android:id="@+id/notebookslist_page"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:gravity="left"
+      android:paddingBottom="3dp"
+      android:paddingLeft="5dp"
+      android:paddingTop="3dp"
+      android:text="0000"
+      android:visibility="invisible"
+      android:textColor="@color/black2"
+      android:textStyle="bold" 
+      android:layout_weight="1"
+      />
+	<EditText
+	  android:id="@+id/notebooks_search_editText"
+	  android:hint="@string/search_label"
+	  android:textColor="@color/black"
+	  android:gravity="right"
+	  android:layout_gravity="center_vertical"
+	  android:maxLines="1"
+	  android:paddingTop="5dp"
+	  android:paddingBottom="5dp" 
+	  android:layout_width="fill_parent"
+	  android:layout_height="wrap_content" 
+	  android:layout_weight="1"
+	  />
+    </LinearLayout>        
+
+<!-- 	<EditText -->
+<!-- 	   	android:id="@+id/notebooks_search_editText" -->
+<!-- 	   	android:hint="@string/search_notes" -->
+<!-- 	   	android:textColor="@color/white" -->
+<!-- 		android:gravity="right" -->
+<!-- 	   	android:layout_gravity="center_vertical" -->
+<!-- 	   	android:maxLines="1" -->
+<!-- 		android:paddingTop="10dp" -->
+<!-- 	   	android:paddingBottom="10dp"  -->
+<!-- 	   	android:layout_width="fill_parent" -->
+<!-- 	   	android:layout_height="wrap_content"  -->
+<!-- 	   	/> -->
+  </LinearLayout>
+  <LinearLayout
+    android:layout_height="wrap_content"
+	android:layout_width="fill_parent"
+	android:orientation="horizontal"
+	android:background="@drawable/pagetitle">
+	<TextView
+      android:id="@+id/notebookslist_page"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:layout_weight="1"
+      android:gravity="left"
+      android:paddingBottom="3dp"
+      android:paddingLeft="5dp"
+      android:paddingTop="3dp"
+      android:text="@string/notebookslist_page"
+      android:textColor="@color/black2"
+      android:textStyle="bold"
+      android:textSize="8dp"
+      />
+  </LinearLayout>
+
+  <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content" 
+        android:isScrollContainer="true" 
+        android:scrollbarAlwaysDrawVerticalTrack="true" 
+        android:scrollbarStyle="outsideInset" 
+        android:scrollbars="vertical">    
+  <LinearLayout
+	  android:layout_height="wrap_content"
+	  android:layout_width="fill_parent"
+	  android:layout_weight="2"
+	  android:orientation="vertical"       
+	  android:gravity="center|center_vertical" 	
+	  android:layout_gravity="center_vertical|center_horizontal|center"
+	  android:background="@color/white"
+	  android:paddingLeft="5dp"
+	  android:paddingRight="5dp"	  
+	  >
+     
+    <EditText 
+      android:id="@+id/firstname"
+      android:hint="@string/fname"
+      android:layout_height="wrap_content" 
+      android:layout_width="fill_parent" 
+      >
+    </EditText>
+     
+    <EditText 
+      android:id="@+id/lastname"
+      android:hint="@string/lname"
+      android:layout_height="wrap_content" 
+      android:layout_width="fill_parent" 
+      >
+    </EditText>
+
+    <EditText 
+      android:id="@+id/username"
+      android:hint="@string/uname"  
+      android:layout_height="wrap_content" 
+      android:layout_width="fill_parent" 
+      >
+    </EditText>
+    
+    <EditText 
+      android:id="@+id/password"
+      android:hint="@string/pword"  
+      android:layout_height="wrap_content" 
+      android:layout_width="fill_parent" 
+      >
+    </EditText>
+    
+    <EditText
+      android:id="@+id/pass_confirm"
+	  android:hint="@string/confirmpword"           
+      android:layout_height="wrap_content" 
+      android:layout_width="fill_parent" 
+      >
+    </EditText>
+    
+    <EditText
+      android:id="@+id/email_address"
+      android:hint="@string/emailadd" 
+      android:layout_height="wrap_content" 
+      android:layout_width="fill_parent" 
+      >
+    </EditText>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="right"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="5dp" >
+
+        <Button
+            android:id="@+id/register"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Register" />
+    </LinearLayout>
+
+   </LinearLayout>
+   </ScrollView>
+   
+   <LinearLayout
+	     android:layout_height="wrap_content"
+	     android:layout_width="fill_parent"
+	     android:orientation="horizontal"
+	     android:layout_gravity="bottom"
+	     android:paddingTop="5dp"
+	     android:background="@drawable/strip">
+   </LinearLayout>
+</LinearLayout>

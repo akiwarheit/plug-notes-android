@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  package="keendy.projects"
+  android:versionCode="1"
+  android:versionName="1.0">
+  
+    <uses-sdk android:minSdkVersion="7" />
+	  <uses-permission android:name="android.permission.INTERNET" />
+	  <uses-permission android:name="android.permission.CAMERA" />
+		<uses-feature android:name="android.hardware.camera" />
+		<uses-feature android:name="android.hardware.camera.autofocus" />
+		<uses-permission android:name="android.permission.RECORD_AUDIO" />
+		<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/> 
+		
+    <application 
+      android:name="com.plug.PlugApplication"
+      android:icon="@drawable/plug"
+      android:label="@string/app_name"
+      android:debuggable="true">
+      <activity android:name="com.plug.session.LoginActivity"
+          android:label="@string/app_name"
+          android:theme="@android:style/Theme.Black.NoTitleBar">
+ 	        <intent-filter>
+              <action android:name="android.intent.action.MAIN" />
+              <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>       
+        </activity>   
+        
+        <activity 
+          android:name="com.plug.main.HomeActivity"
+          android:label="@string/app_name"
+          android:theme="@android:style/Theme.Black.NoTitleBar" >
+        </activity>
+
+        <activity 
+          android:name="com.plug.camera.CameraActivity"
+          android:label="@string/app_name"
+          android:screenOrientation="landscape"
+          android:theme="@android:style/Theme.Black.NoTitleBar" >
+        </activity>
+        
+       <activity 
+        android:name="com.plug.camera.Recognizer"
+        android:label="@string/app_name"
+        android:screenOrientation="landscape"
+        android:theme="@android:style/Theme.Black.NoTitleBar" >
+      </activity>  
+      
+   		<activity
+   		  android:name="com.plug.main.AboutActivity"
+   		  android:label="@string/about_label"
+   		  android:theme="@android:style/Theme.Dialog"
+   		  >
+   		</activity>
+    
+    	<activity 
+    	  android:name="com.plug.note.NoteEditorActivity"
+    	  android:label="@string/app_name" 
+    	  android:theme="@android:style/Theme.Black.NoTitleBar"
+    	  >
+    	</activity>
+    	
+    	<activity
+    	 android:name="com.plug.note.ListTabActivity"
+    	 android:label="@string/app_name"
+    	 android:theme="@android:style/Theme.Black.NoTitleBar" >
+    	 
+    	 </activity>
+    	
+    	<activity 
+    	  android:name="com.plug.note.NotesListActivity"
+    	  android:label="@string/app_name"
+    	  android:theme="@android:style/Theme.Black.NoTitleBar" >
+    	</activity>
+    	
+     	<activity 
+    	  android:name="com.plug.notebook.NotebooksListActivity"
+    	  android:label="@string/app_name" android:theme="@android:style/Theme.Black.NoTitleBar">
+    	</activity>  	
+    	
+    	<activity
+    	  android:name="com.plug.note.WebListActivity"
+    	  android:label="@string/app_name" android:theme="@android:style/Theme.Black.NoTitleBar">	
+    	</activity>
+    	
+    	<activity
+    	  android:name="com.plug.doodle.DrawingActivity"
+    	  android:label="@string/app_name" 
+    	  android:theme="@android:style/Theme.Black.NoTitleBar"
+    	  android:screenOrientation="portrait"
+    	  >	
+    	</activity>
+    	<activity android:name="com.plug.voice.SpeechToTextActivity"></activity>
+    	<activity android:name="com.plug.voice.VoiceRecorderActivity"></activity>
+    	<activity android:name="com.plug.session.RegistrationActivity"></activity>
+    	
+    </application>
+    
+
+</manifest>

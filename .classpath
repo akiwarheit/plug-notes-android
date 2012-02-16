@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="gen"/>
+	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
+	<classpathentry kind="lib" path="assets/libraries/db4o-8.0.184.15484-core-java5.jar"/>
+	<classpathentry kind="lib" path="assets/libraries/gson-1.7.1.jar"/>
+	<classpathentry kind="lib" path="assets/libraries/guice-2.0-no_aop.jar"/>
+	<classpathentry kind="lib" path="assets/libraries/roboguice-1.1.1.jar"/>
+	<classpathentry kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
+	<classpathentry kind="lib" path="assets/libraries/httpmime-4.1.2.jar"/>
+	<classpathentry kind="lib" path="assets/libraries/commons-math-2.2.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/tess-two"/>
+	<classpathentry kind="output" path="bin/classes"/>
+</classpath>

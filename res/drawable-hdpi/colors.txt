@@ -1,0 +1,3 @@
+icon color:
+
+gray: #787a76

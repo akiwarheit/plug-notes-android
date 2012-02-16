@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical"
+  android:layout_width="350dp"
+  android:layout_height="wrap_content" 
+  android:weightSum="1" 
+  android:padding="10dp"
+  >
+  <TextView 
+    android:id="@+id/textView1" 
+	android:text="@string/enter_title"
+	android:textStyle="bold"    
+	android:layout_height="wrap_content" 
+	android:layout_weight="0.08" 
+	android:textSize="20dp"
+	android:layout_width="fill_parent"
+	>
+	</TextView>
+  <LinearLayout
+    android:orientation="horizontal"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content" 
+	android:weightSum="1"
+	android:paddingTop="10dp"
+	>
+	<ImageView 
+	  android:id="@+id/image_title_dialog" 
+	  android:src="@drawable/plug_icon2" 
+	  android:layout_height="wrap_content" 
+	  android:layout_weight="0.08" 
+	  android:layout_width="82dp">
+	  </ImageView>
+		
+    <EditText 
+	  android:layout_height="wrap_content" 
+	  android:id="@+id/add_title" 
+	  android:layout_width="170dp">
+	  </EditText> 
+  </LinearLayout>
+  <Button 
+    android:layout_width="70dp" 
+	android:layout_height="wrap_content" 
+	android:id="@+id/add_bttn" 
+	android:layout_weight="0.08" 
+	android:text="Add"
+	android:layout_gravity="center">
+	</Button>
+</LinearLayout>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:id="@+id/layout_main">
+  <LinearLayout
+    android:layout_height="wrap_content"
+	android:layout_width="fill_parent"
+	android:orientation="horizontal"
+	android:background="@drawable/strip"	
+	>        
+	<ImageView
+	  android:id="@+id/home_logo"
+	  android:src="@drawable/plug_head_1"
+	  android:layout_width="wrap_content"
+	  android:layout_height="wrap_content"
+	  android:paddingLeft="9dp"
+	  android:paddingTop="3dp"
+	  android:paddingBottom="3dp"
+	  android:layout_gravity="left"
+	  >
+	  </ImageView>
+  </LinearLayout>
+  <LinearLayout
+    android:layout_height="wrap_content"
+	android:layout_width="fill_parent"
+	android:orientation="horizontal"
+	android:background="@drawable/pagetitle">
+	
+<!-- 	Page title -"Doodle" -->
+	<TextView
+      android:id="@+id/doodle_page"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:layout_weight="1"
+      android:gravity="left"
+      android:paddingBottom="3dp"
+      android:paddingLeft="5dp"
+      android:paddingTop="3dp"
+      android:text="@string/doodle_page"
+      android:textColor="@color/black2"
+      android:textStyle="bold" />
+  </LinearLayout>
+    <LinearLayout  android:id="@+id/paint_view_layout"
+                   android:layout_width="fill_parent"
+                   android:layout_height="fill_parent"
+                   android:layout_weight="1"/>
+
+<!--     <LinearLayout -->
+<!--         android:id="@+id/paint_view_menu" -->
+<!--         style="@android:style/ButtonBar" -->
+<!--         android:layout_width="fill_parent" -->
+<!--         android:layout_height="wrap_content" -->
+<!--         android:orientation="horizontal" > -->
+
+<!--         <ImageButton -->
+<!--             android:id="@+id/btn_color" -->
+<!--             android:layout_width="fill_parent" -->
+<!--             android:layout_height="fill_parent" -->
+<!--             android:layout_weight="1" -->
+<!--             android:focusable="true" -->
+<!--             android:src="@drawable/color_grid" -->
+<!--             android:text="Color" /> -->
+
+<!--         <ImageButton -->
+<!--             android:id="@+id/btn_shapes" -->
+<!--             android:layout_width="fill_parent" -->
+<!--             android:layout_height="fill_parent" -->
+<!--             android:layout_weight="1" -->
+<!--             android:focusable="true" -->
+<!--             android:src="@drawable/ss" -->
+<!--             android:text="Shapes" /> -->
+
+<!--         <ImageButton -->
+<!--             android:id="@+id/btn_undo" -->
+<!--             android:layout_width="fill_parent" -->
+<!--             android:layout_height="fill_parent" -->
+<!--             android:layout_weight="1" -->
+<!--             android:focusable="true" -->
+<!--             android:src="@drawable/arrow_undo" -->
+<!--             android:text="Undo" /> -->
+
+<!--         <ImageButton -->
+<!--             android:id="@+id/btn_redo" -->
+<!--             android:layout_width="fill_parent" -->
+<!--             android:layout_height="fill_parent" -->
+<!--             android:layout_weight="1" -->
+<!--             android:focusable="true" -->
+<!--             android:src="@drawable/arrow_redo" -->
+<!--             android:text="Redo" /> -->
+<!--     </LinearLayout> -->
+
+</LinearLayout>

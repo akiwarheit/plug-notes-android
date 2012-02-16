@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+  xmlns:android="http://schemas.android.com/apk/res/android">
+  <item android:id="@+id/notebooks_list_menu_addNotebook"
+  	android:icon="@drawable/add2"
+  	android:title="@string/add_notebook" />
+</menu>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?> 
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="@drawable/backgroundnogradient">
+
+	<LinearLayout
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:gravity="center|center_vertical"
+		android:layout_gravity="center_horizontal"
+		android:layout_marginTop="10dp"
+		android:layout_marginBottom="5dp"
+		android:background="@drawable/plugnotes_logo_2">
+	</LinearLayout>
+
+	<LinearLayout
+        android:id="@+id/loginInputField"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_weight="2"
+        android:orientation="horizontal"       
+        android:gravity="center|center_vertical" 	
+    	android:layout_gravity="center_vertical|center_horizontal|center"
+    	android:paddingTop="10dp"
+		android:paddingRight="15dp"
+		android:paddingLeft="15dp"
+		android:paddingBottom="10dp"
+		android:weightSum="5"
+		android:background="@drawable/header"
+		>
+
+	<LinearLayout
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		android:layout_weight="2"
+		android:gravity="center|center_vertical"
+		>
+		<EditText
+			android:id="@+id/login_username"
+		 	android:hint="username"
+		 	android:textColorHint="#4d7b00"
+		 	android:layout_width="fill_parent"
+		 	android:layout_height="wrap_content"
+		 	android:singleLine="true"
+		 	android:clickable="true"
+		 	android:editable="true"
+		 	android:typeface="serif"
+		 	android:layout_weight="2"/>		 	
+	</LinearLayout>        
+	
+	
+	<LinearLayout
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		android:layout_weight="2"
+		android:gravity="center|center_vertical"
+		>
+		<EditText
+			android:id="@+id/login_password"
+		 	android:hint="••••••••"
+		 	android:textColorHint="#4d7b00"
+		 	android:password="true"
+		 	android:layout_width="fill_parent"
+		 	android:layout_height="wrap_content"
+		 	android:singleLine="true"
+		 	android:clickable="true"
+		 	android:editable="true"	
+		 	android:typeface="serif"
+		 	android:layout_weight="2" 
+		 	/>
+	</LinearLayout>        
+        
+	<LinearLayout
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		android:layout_weight="1"
+		android:gravity="center|center_vertical"
+		>        
+    	<Button
+			android:id="@+id/login_buttonLogin"
+			android:text="Login"
+			android:typeface="serif"
+			android:textColor="#4d7b00"
+			android:layout_height="wrap_content"
+			android:layout_width="fill_parent"
+			android:layout_weight="2.5">
+		</Button>
+	</LinearLayout>
+	</LinearLayout>
+    
+    <LinearLayout
+    	android:id="@+id/register_clickable_textview"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:orientation="horizontal"
+        android:layout_gravity="bottom"
+        >
+        <TextView
+			android:id="@+id/register"   		
+	   		android:typeface="serif"
+	   		android:textColor="#4d7b00"
+			android:gravity="right"
+	   		android:layout_gravity="center_vertical"
+	   		android:layout_width="wrap_content"
+	   		android:layout_height="wrap_content"
+	   		android:layout_weight="1"
+	   		android:layout_marginRight="15dp"
+	   		android:clickable="true"
+	   		android:textSize="12dp"
+	   		/>
+    </LinearLayout>
+</LinearLayout>

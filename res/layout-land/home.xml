@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent"
+  android:orientation="vertical"
+  android:layout_gravity="bottom"
+  android:background="@color/white">
+  <LinearLayout
+    android:layout_height="wrap_content"
+	android:layout_width="fill_parent"
+	android:orientation="horizontal"
+	android:background="@drawable/strip"	
+	>        
+	<ImageView
+	  android:id="@+id/home_logo"
+	  android:src="@drawable/plug_head_1"
+	  android:layout_width="wrap_content"
+	  android:layout_height="wrap_content"
+	  android:paddingLeft="9dp"
+	  android:paddingTop="3dp"
+	  android:paddingBottom="3dp"
+	  android:layout_gravity="left"
+	  >
+	  </ImageView>
+  </LinearLayout>
+<!--   <LinearLayout -->
+<!--     android:layout_height="wrap_content" -->
+<!-- 	android:layout_width="fill_parent" -->
+<!-- 	android:orientation="horizontal" -->
+<!-- 	android:background="@drawable/strip">         -->
+
+<!-- 	<ImageView -->
+<!-- 	  android:id="@+id/home_logo" -->
+<!-- 	  android:src="@drawable/plug_word" -->
+<!-- 	  android:layout_width="wrap_content" -->
+<!-- 	  android:layout_height="wrap_content" -->
+<!-- 	  android:layout_gravity="left"> -->
+<!-- 	  </ImageView>         -->
+	    
+<!-- 	<TextView -->
+<!-- 	  android:id="@+id/home_username" -->
+<!-- 	  android:text="This is User Name." -->
+<!-- 	  android:textColor="@color/white" -->
+<!-- 	  android:gravity="right" -->
+<!-- 	  android:layout_gravity="center_vertical" -->
+<!-- 	  android:paddingTop="10px" -->
+<!-- 	  android:paddingBottom="10px"  -->
+<!-- 	  android:paddingRight="10px"  -->
+<!-- 	  android:layout_width="fill_parent" -->
+<!-- 	  android:layout_height="wrap_content" -->
+<!-- 	  android:layout_weight="1" /> -->
+<!--   </LinearLayout> -->
+  
+  <LinearLayout
+    android:layout_height="wrap_content"
+    android:layout_width="fill_parent"
+    android:layout_weight="2"
+    android:orientation="horizontal"       
+    android:gravity="center|center_vertical" 	
+    android:layout_gravity="center_vertical|center_horizontal|center"
+    android:background="@drawable/background"
+    >
+    <LinearLayout
+	  android:layout_width="0dp"
+	  android:layout_height="wrap_content"
+      android:layout_weight="1"
+	  android:gravity="center|center_vertical"
+	  >
+	  <Button
+	    android:id="@+id/home_createnote"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:background="@android:color/transparent"
+	    android:drawableTop="@drawable/newnote3"
+	    android:paddingBottom="5dp"
+	    android:text="@string/createnote"
+	    android:textColor="@color/black"
+	    android:textStyle="bold" />
+    </LinearLayout>        
+   
+	<LinearLayout
+      android:layout_width="0dp"
+	  android:layout_height="wrap_content"
+	  android:layout_weight="1"
+	  android:gravity="center|center_vertical"
+	  >      
+      <Button
+	    android:id="@+id/home_doodleNote"
+		android:text="@string/doodlenote"
+		android:textColor="@color/black"
+		android:textStyle="bold"
+		android:background="@android:color/transparent"
+		android:drawableTop="@drawable/pen3"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:paddingBottom="5dp"
+		>
+	  </Button>
+    </LinearLayout>        
+        
+	<LinearLayout
+	  android:layout_width="0dp"
+      android:layout_height="wrap_content"
+	  android:layout_weight="1"
+	  android:gravity="center|center_vertical"
+	  >        
+      <Button
+	    android:id="@+id/home_allnotes"
+		android:text="@string/allnotes"
+		android:textStyle="bold"
+		android:textColor="@color/black"	    
+		android:background="@android:color/transparent"
+		android:drawableTop="@drawable/noteslist"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:paddingTop="5dp"
+		>
+		</Button>
+	</LinearLayout>
+
+	<LinearLayout
+	  android:layout_width="0dp"
+      android:layout_height="wrap_content"
+	  android:layout_weight="1"
+	  android:gravity="center|center_vertical"
+	  >        
+      <Button
+	    android:id="@+id/home_notebooks"
+		android:text="@string/notebooksbutton"
+		android:textColor="@color/black"
+		android:textStyle="bold"
+		android:background="@android:color/transparent"
+	    android:drawableTop="@drawable/notebooks2"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:paddingTop="5dp"
+		>
+	    </Button>
+	</LinearLayout>   
+  </LinearLayout>
+  <LinearLayout
+    android:layout_height="wrap_content"
+	android:layout_width="fill_parent"
+	android:orientation="horizontal"
+	android:layout_gravity="bottom"
+	android:paddingTop="5px"
+	android:background="@drawable/strip">
+	<TextView
+	      android:id="@+id/doodle_page"
+	      android:layout_width="fill_parent"
+	      android:layout_height="wrap_content"
+	      android:layout_weight="1"
+	      android:gravity="right"
+	      android:paddingBottom="3dp"
+	      android:paddingRight="5dp"
+	      android:paddingTop="5dp"
+	      android:textSize="8dp"
+	      android:text="@string/team"
+	      android:textColor="@color/white"
+	      android:textStyle="bold" />
+    </LinearLayout>
+</LinearLayout>
