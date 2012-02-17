@@ -4,7 +4,7 @@
   android:layout_height="fill_parent"
   android:orientation="vertical"
   android:layout_gravity="bottom"
-   android:background="@drawable/backrepeat" >
+  android:background="@drawable/backgroundnogradient" >  
 <!--   android:background="@drawable/backgroundnogradient"> -->
 
   <LinearLayout

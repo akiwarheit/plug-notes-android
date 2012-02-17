@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+  xmlns:android="http://schemas.android.com/apk/res/android">
+   <item android:id="@+id/camera_menu"
+          android:icon="@drawable/camera_1"
+          android:title="@string/take_snapshot" />  
+   <item android:id="@+id/note_attach"
+          android:icon="@drawable/attach_green"
+          android:title="@string/attach" /> 
+   <item android:id="@+id/cancel_menu"
+          android:icon="@drawable/cancel"
+          android:title="@string/cancel" />
+   
+     
+</menu>

@@ -2,10 +2,6 @@ package com.plug.note;
 
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
 
 import keendy.projects.R;
@@ -13,14 +9,14 @@ import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.AssetManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Menu;
@@ -33,7 +29,6 @@ import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.Gallery;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.googlecode.tesseract.android.TessBaseAPI;
 import com.plug.Action;
@@ -48,7 +43,7 @@ import com.plug.utils.FileManager;
 /**
  * TODO implement menus for editing the title, discarding etc
  */
-public class NoteEditorActivity extends Activity{
+public class NoteEditorActivity extends Activity implements OCRCallback {
 
 	 private PlugApplication application;
 	 private static String TAG = "Note Editor";
@@ -209,54 +204,54 @@ public class NoteEditorActivity extends Activity{
 		if(requestCode == REQUEST_OCR) {
 			if(resultCode == RESULT_OK) {
 				Bitmap x = (Bitmap) data.getExtras().get("data");
-				x = x.copy(Bitmap.Config.ARGB_8888, true);
-				String storage = Environment.getExternalStorageDirectory().toString() + "/plug/";
-				String absoluteStorage = storage + "tessdata/";
-				
-				String[] paths = new String[] { storage, absoluteStorage };
-				
-				for(String path : paths) {
-					File dir = new File(path);
-  				dir.mkdirs();
-				}
-			
-				if (!(new File(storage + "tessdata/eng.traineddata")).exists()) {
-					try {
-						
-						AssetManager manager = getAssets();
-						InputStream is = manager.open("tessdata/eng.traineddata");
-						OutputStream os = new FileOutputStream(storage + "tessdata/eng.traineddata");
-						
-						byte[] buf = new byte[1024];
-						int len;
-						
-						while((len = is.read(buf)) > 0) {
-							os.write(buf,0,len);
-						}
-						
-						is.close();
-						os.close();
-						
-						Log.i("SUCCESS: ", "coppied eng.traineddata");
-						
-					} catch (IOException e) {
-						Log.e("FAILED TO COPY: ", e.getMessage());					
-					}
-				}
-				FileManager manager = new FileManager(this);
-				manager.writeRawToSD(FileManager.TESSERACT_PATH + "eng.traineddata", "tessdata/eng.traineddata");
+//				String storage = Environment.getExternalStorageDirectory().toString() + "/plug/";
+//				String absoluteStorage = storage + "tessdata/";
+//				
+//				String[] paths = new String[] { storage, absoluteStorage };
+//				
+//				for(String path : paths) {
+//					File dir = new File(path);
+//  				dir.mkdirs();
+//				}
+//			
+//				if (!(new File(storage + "tessdata/eng.traineddata")).exists()) {
+//					try {
+//						
+//						AssetManager manager = getAssets();
+//						InputStream is = manager.open("tessdata/eng.traineddata");
+//						OutputStream os = new FileOutputStream(storage + "tessdata/eng.traineddata");
+//						
+//						byte[] buf = new byte[1024];
+//						int len;
+//						
+//						while((len = is.read(buf)) > 0) {
+//							os.write(buf,0,len);
+//						}
+//						
+//						is.close();
+//						os.close();
+//						
+//						Log.i("SUCCESS: ", "coppied eng.traineddata");
+//						
+//					} catch (IOException e) {
+//						Log.e("FAILED TO COPY: ", e.getMessage());					
+//					}
+//				}
 
-				TessBaseAPI tesseract = new TessBaseAPI();
-				tesseract.setDebug(true);
-				tesseract.init(FileManager.STORAGE_PATH, "eng");
-				tesseract.setImage(x);
-				String result = tesseract.getUTF8Text();
 				
-				Log.i(TAG, result);
-				Toast.makeText(this, result, Toast.LENGTH_LONG);
-				tesseract.end();
-				
-				noteView.setText(noteView.getText() + " " + result);
+				new OCRTask(this,x,this).execute();
+
+//				TessBaseAPI tesseract = new TessBaseAPI();
+//				tesseract.setDebug(true);
+//				tesseract.init(FileManager.STORAGE_PATH, "eng");
+//				tesseract.setImage(x);
+//				String result = tesseract.getUTF8Text();
+//				
+//				Log.i(TAG, result);
+//				Toast.makeText(this, result, Toast.LENGTH_LONG);
+//				tesseract.end();
+//				
+//				noteView.setText(noteView.getText() + " " + result);
 			}
 		}
 	}
@@ -375,6 +370,56 @@ public class NoteEditorActivity extends Activity{
 	    } 
 	}
 	
-	
+	public class OCRTask extends AsyncTask<Void, Integer, String> {
+		
+		private ProgressDialog progress;
+		private Context context;
+		private Bitmap imageToProcess;
+		private OCRCallback callback;
+		private TessBaseAPI tesseract; 
+		
+		public OCRTask(Context context, Bitmap bitmap, OCRCallback callback) {
+			this.context = context;
+			this.imageToProcess = bitmap.copy(Bitmap.Config.ARGB_8888, true);;
+			progress = new ProgressDialog(context);
+			this.callback = callback;
+		}
+		
+		@Override
+		protected void onPreExecute() {
+			FileManager manager = new FileManager(context);
+			manager.writeRawToSD(FileManager.TESSERACT_PATH + "eng.traineddata", "tessdata/eng.traineddata");
+			this.progress.setIndeterminate(true);
+			this.progress.setIndeterminateDrawable(context.getResources().getDrawable(R.anim.spinner_loading));
+			this.progress.setMessage("Recognizing using Tesseract, bro.");
+			this.progress.setProgress(0);
+			this.progress.show();
+			tesseract = new TessBaseAPI();
+			tesseract.setDebug(true);
+			tesseract.init(FileManager.STORAGE_PATH, "eng");
+			tesseract.setImage(imageToProcess);
+		}
+
+		@Override
+    protected String doInBackground(Void... params) {
+			String result = tesseract.getUTF8Text();
+	    return result;
+    }
+		
+		protected void onPostExecute(String finish) {
+			if(progress.isShowing())
+				progress.dismiss();
+			
+			callback.onFinishRecognition(finish);
+			
+			tesseract.end();
+		}	
+		
+	}
+
+	@Override
+  public void onFinishRecognition(String recognizedText) {
+		noteView.setText(noteView.getText() + " " + recognizedText);
+  }
 	
 }

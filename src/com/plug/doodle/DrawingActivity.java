@@ -46,17 +46,18 @@ public class DrawingActivity extends Activity
 
     private static final int HISTORY_CAPACITY = 20;
     private boolean saved = false;
-    private PaintView _paintView;
-    private ShakeManager _shakeManager;
-    private Stack<PaintAction> _paintActions;
-    private int _currentAction;
-    private int initialColor = Color.BLACK;
+    private PaintView paintView;
+    private ShakeManager shakeManager;
+    private Stack<PaintAction> paintActions = null;
+    private int currentAction;
+//    private int initialColor = Color.BLACK;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        _paintActions = new Stack<PaintAction>();
+        paintActions = new Stack<PaintAction>();
+       
         mPaint = new Paint();
         mPaint.setAntiAlias(true);
         mPaint.setDither(true);
@@ -67,21 +68,21 @@ public class DrawingActivity extends Activity
         mPaint.setColor(0xFFFF0000);
 
         initPaintViewLayout();
-        registerForContextMenu(_paintView);
+        registerForContextMenu(paintView);
 
-        _shakeManager = new ShakeManager(this);
-        _shakeManager.addListener(this);
+        shakeManager = new ShakeManager(this);
+        shakeManager.addListener(this);
 
-        Bitmap bitmap = _paintView.getDrawableBitmapCopy();
-        _paintActions.push(new PaintAction(bitmap));
-        _currentAction = _paintActions.size();
+        Bitmap bitmap = paintView.getDrawableBitmapCopy();
+        paintActions.push(new PaintAction(bitmap));
+        currentAction = paintActions.size();
     }
 
     private void initPaintViewLayout() {
         setContentView(R.layout.doodle_area);
         LinearLayout layout = (LinearLayout) findViewById(R.id.paint_view_layout);
-        _paintView = new PaintView(this);
-        layout.addView(_paintView);
+        paintView = new PaintView(this);
+        layout.addView(paintView);
         
         mPaint.setStrokeWidth(6);
         mPaint.setColor(Color.BLACK);
@@ -95,8 +96,8 @@ public class DrawingActivity extends Activity
     protected void onPause() {
 
         super.onPause();
-        if (_shakeManager != null) {
-            _shakeManager.onPause();
+        if (shakeManager != null) {
+            shakeManager.onPause();
         }
         mPaint.setStrokeWidth(6);
         mPaint.setColor(Color.BLACK);
@@ -108,7 +109,7 @@ public class DrawingActivity extends Activity
     @Override
     protected void onResume() {
         super.onResume();
-        _shakeManager.onResume();
+        shakeManager.onResume();
         mPaint.setStrokeWidth(6);
         mPaint.setColor(Color.BLACK);
         mPaint.setMaskFilter(null);
@@ -124,7 +125,7 @@ public class DrawingActivity extends Activity
 
     @Override
     public void onShakeEvent() {
-        new OnShakeAction().doAction(this, _paintView);
+        new OnShakeAction().doAction(this, paintView);
     }
 
     public class PaintView extends View {
@@ -156,13 +157,13 @@ public class DrawingActivity extends Activity
 
         private void addActionToHistory() {
 
-            if (_paintActions.size() >= HISTORY_CAPACITY) {
-                _paintActions.get(0).getBitmap().recycle();
-                _paintActions.remove(0);
+            if (paintActions.size() >= HISTORY_CAPACITY) {
+                paintActions.get(0).getBitmap().recycle();
+                paintActions.remove(0);
             }
 
-            _paintActions.push(new PaintAction(Bitmap.createBitmap(mBitmap)));
-            _currentAction = _paintActions.size();
+            paintActions.push(new PaintAction(Bitmap.createBitmap(mBitmap)));
+            currentAction = paintActions.size();
         }
 
         public Bitmap getDrawableBitmapCopy() {
@@ -235,9 +236,9 @@ public class DrawingActivity extends Activity
                     mShape.reset();
                     invalidate();
 
-                    if (_currentAction < _paintActions.size()) {
-                        for (int i = 0; i < _paintActions.size() - _currentAction + 1; i++) {
-                            _paintActions.removeElementAt(_paintActions.size() - 1);
+                    if (currentAction < paintActions.size()) {
+                        for (int i = 0; i < paintActions.size() - currentAction + 1; i++) {
+                            paintActions.removeElementAt(paintActions.size() - 1);
                         }
                     }
                     addActionToHistory();
@@ -279,7 +280,7 @@ public class DrawingActivity extends Activity
       	          Uri selectedImageUri = data.getData();
       	          WindowManager win = getWindowManager();
       	          bitmap = Image.rescaleBitmap(getApplicationContext(), selectedImageUri, win);
-      	          _paintView.setDrawableBitmap(bitmap);
+      	          paintView.setDrawableBitmap(bitmap);
             	}
             	break;
             
@@ -288,38 +289,42 @@ public class DrawingActivity extends Activity
     
     @Override
 	public void onBackPressed() {
-		
-		if(!isEmpty(_paintView)){
+    	 Log.e("", paintActions.size()+"");
+		if(paintActions.size()>1){	
 			new AlertDialog.Builder(this)
-	        .setTitle( "Save Doodle" )
-	        .setMessage( "Do you want to save changes?" )
-	        .setPositiveButton("YES", new OnClickListener() {
-	            public void onClick(DialogInterface arg0, int arg1) {
-	            	saveDoodle(_paintView);
-	            	saved = true;
-	            	finish();	           
-	            }
-	        })
-	        .setNegativeButton("NO", new OnClickListener() {
-	            public void onClick(DialogInterface arg0, int arg1) {
-	                finish();	             
-	            }
-	        }).show();
-			}
-			if(saved || isEmpty(_paintView)){
-				this.finish();
-				saved = false;
-			}
-			
+		    .setTitle( "Save Doodle" )
+		    .setMessage( "Do you want to save changes?" )
+		    .setPositiveButton("YES", new OnClickListener() {
+		        public void onClick(DialogInterface arg0, int arg1) {
+		        	saveDoodle(paintView);
+		        	saved = true;
+		        	finish();           
+		        }
+		    })
+		    .setNegativeButton("NO", new OnClickListener() {
+		        public void onClick(DialogInterface arg0, int arg1) {
+		            finish();	             
+		        }
+		    }).show();
+			return;
+		}
+		
+		else
+			finish();
+		
+		//super.onBackPressed();
+		
 	}
-
+    
+    
+    
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()) {
           
             case R.id.doodle_clear: 
-                _paintView.onClear();
+                paintView.onClear();
                 break;
             
             case R.id.doodle_openfile:
@@ -344,7 +349,7 @@ public class DrawingActivity extends Activity
             	 break;
 
             case R.id.doodle_save:
-            	saveDoodle(_paintView);
+            	saveDoodle(paintView);
             	return true;
         }
         return super.onOptionsItemSelected(item);
@@ -385,35 +390,19 @@ public class DrawingActivity extends Activity
     		}
 		
 	}
-    private boolean isEmpty(View v){
-		v.setDrawingCacheEnabled(true);
-		v.measure(MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED),
-				MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
-		v.layout(0, 0, v.getWidth(), v.getHeight());
-		v.buildDrawingCache(true);
-
-		Bitmap bm = Bitmap.createBitmap(v.getDrawingCache());
-		v.setDrawingCacheEnabled(false);
-		if(bm != null){
-			
-			return false;
-		} else {
-			
-			return true;		
-		}
-	}
 
 	private void redo() {
-        if (_currentAction < _paintActions.size()) {
-            _paintView.repaintAction(_paintActions.get(_currentAction));
-            _currentAction++;
+        if (currentAction < paintActions.size()) {
+            paintView.repaintAction(paintActions.get(currentAction));
+            currentAction++;
         }
     }
 
     private void undo() {
-        if (_currentAction > 1) {
-            _currentAction--;
-            _paintView.repaintAction(_paintActions.get(_currentAction - 1));
+        if (currentAction > 1) {
+            currentAction--;
+            paintView.repaintAction(paintActions.get(currentAction - 1));
         }
     }
+    
 }

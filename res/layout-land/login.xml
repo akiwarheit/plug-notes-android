@@ -78,7 +78,14 @@
 		android:layout_height="wrap_content"
 		android:layout_weight="1"
 		android:gravity="center|center_vertical"
-		>        
+		>
+		<CheckBox
+              android:id="@+id/dev_checkbox"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_weight="1"
+              
+             />        
     	<Button
 			android:id="@+id/login_buttonLogin"
 			android:text="Login"
@@ -98,6 +105,7 @@
         android:orientation="horizontal"
         android:layout_gravity="bottom"
         >
+	
         <TextView
 			android:id="@+id/register"   		
 	   		android:typeface="serif"
@@ -111,5 +119,7 @@
 	   		android:clickable="true"
 	   		android:textSize="12dp"
 	   		/>
+        
+        
     </LinearLayout>
 </LinearLayout>

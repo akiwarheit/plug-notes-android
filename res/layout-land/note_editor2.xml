@@ -129,7 +129,7 @@
 	    />
 
       <view
-        class="com.plug.note.NoteEditorActivity$PLUGEditText"
+        class="com.plug.views.PLUGEditText"
 		android:id="@+id/note"
 		android:hint="@string/note_content"
 		android:layout_width="fill_parent"

@@ -5,12 +5,12 @@ import android.view.MotionEvent;
 
 public class PathShape extends Shape {
 
-    private int _x;
-    private int _y;
-    private Path _path;
+    private int mX;
+    private int mY;
+    private Path mPath;
 
     public PathShape(){
-        _path = new Path();
+        mPath = new Path();
     }
 
     @Override
@@ -21,7 +21,7 @@ public class PathShape extends Shape {
     @Override
     public void draw(Canvas canvas, Paint paint, Region region) {
 
-        if(_path.isEmpty()){
+        if(mPath.isEmpty()){
 
             Rect rect = getRectWithDefaultMargins(region);
 
@@ -31,44 +31,44 @@ public class PathShape extends Shape {
             int xPile = (rect.left + rect.right) /6;
             int yPile = (rect.top + rect.bottom) /6;
 
-            _path.moveTo(x, y);
+            mPath.moveTo(x, y);
 
-            _x = x;
-            _y = y;
+            mX = x;
+            mY = y;
 
             x = 2 * xPile;
             y = 4 * yPile;
 
-            _path.quadTo(_x, _y, (x + _x)/2, (y + _y)/2);
+            mPath.quadTo(mX, mY, (x + mX)/2, (y + mY)/2);
 
-            _x = x;
-            _y = y;
+            mX = x;
+            mY = y;
 
             x = 3 * xPile;
             y = 4 * yPile;
 
-            _path.quadTo(_x, _y, (x + _x)/2, (y + _y)/2);
+            mPath.quadTo(mX, mY, (x + mX)/2, (y + mY)/2);
 
-            _x = x;
-            _y = y;
+            mX = x;
+            mY = y;
 
             x = 4 * xPile;
             y = 2 * yPile;
 
-            _path.quadTo(_x, _y, (x + _x)/2, (y + _y)/2);
+            mPath.quadTo(mX, mY, (x + mX)/2, (y + mY)/2);
 
-            _x = x;
-            _y = y;
+            mX = x;
+            mY = y;
 
             x = rect.right;
             y = rect.top;
             
-            _path.quadTo(_x, _y, (x + _x)/2, (y + _y)/2);
+            mPath.quadTo(mX, mY, (x + mX)/2, (y + mY)/2);
 
-            _x = x;
-            _y = y;
+            mX = x;
+            mY = y;
 
-            _path.lineTo(_x, _y);
+            mPath.lineTo(mX, mY);
 
             draw(canvas, paint);
             reset();
@@ -77,7 +77,7 @@ public class PathShape extends Shape {
 
     @Override
     public void draw(Canvas canvas, Paint paint) {
-        canvas.drawPath(_path, paint);
+        canvas.drawPath(mPath, paint);
     }
 
     @Override
@@ -85,27 +85,27 @@ public class PathShape extends Shape {
 
         switch(action){
             case MotionEvent.ACTION_DOWN: {
-                _path.reset();
-                _path.moveTo(x, y);
-                _x = x;
-                _y = y;
+                mPath.reset();
+                mPath.moveTo(x, y);
+                mX = x;
+                mY = y;
                 break;
             }
             case MotionEvent.ACTION_MOVE: {
-                _path.quadTo(_x, _y, (x + _x)/2, (y + _y)/2);
-                _x = x;
-                _y = y;
+                mPath.quadTo(mX, mY, (x + mX)/2, (y + mY)/2);
+                mX = x;
+                mY = y;
                 break;
             }
             case MotionEvent.ACTION_UP: {
-                _path.lineTo(_x, _y);
+                mPath.lineTo(mX, mY);
             }
         }
     }
 
     @Override
     public void reset() {
-        _x = _y = 0;
-        _path.reset();
+        mX = mY = 0;
+        mPath.reset();
     }
 }

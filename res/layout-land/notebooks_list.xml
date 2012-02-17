@@ -116,7 +116,6 @@
       android:text="@string/notebookslist_page"
       android:textColor="@color/black2"
       android:textStyle="bold"
-      android:textSize="8dp"
       />
   </LinearLayout>
 <!--   <LinearLayout -->
