@@ -1,13 +1,8 @@
 package com.plug.session;
 
-import java.io.IOException;
-
 import keendy.projects.R;
 import android.app.Activity;
-import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,6 +14,7 @@ import android.widget.Toast;
 
 import com.plug.database.model.User;
 import com.plug.main.HomeActivity;
+import com.plug.web.LoginTask;
 import com.plug.web.SessionCallback;
 import com.plug.web.WebService;
 
@@ -97,71 +93,71 @@ public class LoginActivity extends Activity implements OnClickListener, SessionC
 	/**
 	 * @author kevin
 	 */
-	public class LoginTask extends AsyncTask<Void, Integer, User> {
-		
-		private ProgressDialog dialog;
-		private SessionCallback callback;
-		private User user;
-		private String email;
-		private String password;
-		private Context context;
-
-		public LoginTask(Context context, String email, String password, SessionCallback callback) {
-			this.callback = callback;
-			this.context = context;
-			this.dialog = new ProgressDialog(context);
-			this.email = email;
-			this.password = password;
-		}
-		
-		@Override
-		protected void onPreExecute() {
-			this.dialog.setIndeterminate(true);
-			this.dialog.setIndeterminateDrawable(context.getResources().getDrawable(R.anim.spinner_loading));
-			this.dialog.setMessage("Loggin' in, bro");
-			this.dialog.setProgress(0);
-			this.dialog.show();
-		}
-		
-		@Override
-    protected User doInBackground(Void... params) {
-			try {
-				user = User.login(email, password);
-      } catch (NullPointerException e) {
-      	return null;
-      } catch (IOException e) {
-      	return null;
-      }
-		
-			return user;
-    }
-
-		@Override
-		protected void onPostExecute(User finish) {
-			if(this.dialog.isShowing())
-				this.dialog.dismiss();
-			
-			if(finish != null) {
-  			this.user = finish;
-      	User.setUser(context, this.user);
-      	LoginActivity.this.toHomepage();
-			} else {
-				Toast.makeText(context, "Invalid username or pass, bro.", Toast.LENGTH_LONG).show();
-			}
-    	
-//			if(this.user != null) {
-//  			LoginActivity.this.toHomepage();
-//			} else
-				
-//				Log.e("CANT LOGIN FOR SOME REASON BRO", "and i dont know why");
-		}
-		
-		@Override
-		protected void onProgressUpdate(Integer... progress) {
-  		this.dialog.setProgress(progress[0]);
-		}
-
-	}
+//	public class LoginTask extends AsyncTask<Void, Integer, User> {
+//		
+//		private ProgressDialog dialog;
+//		private SessionCallback callback;
+//		private User user;
+//		private String email;
+//		private String password;
+//		private Context context;
+//
+//		public LoginTask(Context context, String email, String password, SessionCallback callback) {
+//			this.callback = callback;
+//			this.context = context;
+//			this.dialog = new ProgressDialog(context);
+//			this.email = email;
+//			this.password = password;
+//		}
+//		
+//		@Override
+//		protected void onPreExecute() {
+//			this.dialog.setIndeterminate(true);
+//			this.dialog.setIndeterminateDrawable(context.getResources().getDrawable(R.anim.spinner_loading));
+//			this.dialog.setMessage("Loggin' in, bro");
+//			this.dialog.setProgress(0);
+//			this.dialog.show();
+//		}
+//		
+//		@Override
+//    protected User doInBackground(Void... params) {
+//			try {
+//				user = User.login(email, password);
+//      } catch (NullPointerException e) {
+//      	return null;
+//      } catch (IOException e) {
+//      	return null;
+//      }
+//		
+//			return user;
+//    }
+//
+//		@Override
+//		protected void onPostExecute(User finish) {
+//			if(this.dialog.isShowing())
+//				this.dialog.dismiss();
+//			
+//			if(finish != null) {
+//  			this.user = finish;
+//      	User.setUser(context, this.user);
+//      	LoginActivity.this.toHomepage();
+//			} else {
+//				Toast.makeText(context, "Invalid username or pass, bro.", Toast.LENGTH_LONG).show();
+//			}
+//    	
+////			if(this.user != null) {
+////  			LoginActivity.this.toHomepage();
+////			} else
+//				
+////				Log.e("CANT LOGIN FOR SOME REASON BRO", "and i dont know why");
+//		}
+//		
+//		@Override
+//		protected void onProgressUpdate(Integer... progress) {
+//  		this.dialog.setProgress(progress[0]);
+//		}
+//
+//	}
 	
 	@Override
 	public void onResume() {
@@ -194,6 +190,13 @@ public class LoginActivity extends Activity implements OnClickListener, SessionC
 	
 	@Override
 	public void onSuccessfullLogin(User user){ 
-		
+		User.setUser(this, user);
+		toHomepage();
 	}
+	
+	@Override
+	public void onUnsuccessfullLogin() {
+		Toast.makeText(this, "Invalid username or pass, bro.", Toast.LENGTH_LONG).show();	
+	}
+	
 }

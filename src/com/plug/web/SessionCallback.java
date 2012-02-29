@@ -6,4 +6,5 @@ public interface SessionCallback {
 	
 	public abstract void onSuccessfullLogin(User user);
 	
+	public abstract void onUnsuccessfullLogin();
 }
