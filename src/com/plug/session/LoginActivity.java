@@ -19,20 +19,15 @@ import android.widget.Toast;
 
 import com.plug.database.model.User;
 import com.plug.main.HomeActivity;
+import com.plug.web.SessionCallback;
 import com.plug.web.WebService;
 
-public class LoginActivity extends Activity implements OnClickListener{
+public class LoginActivity extends Activity implements OnClickListener, SessionCallback {
 
-//	@InjectView(R.id.login_username)  private EditText inputEmail;
-//	@InjectView(R.id.login_password)  private EditText inputPassword;
-//	@InjectView(R.id.login_buttonLogin)  private Button loginButton;
-	
 	private EditText inputEmail;
 	private EditText inputPassword;
 	private Button loginButton;
 	private CheckBox dev;
-	
-//	private PlugApplication application;
 	
 	private static String LOGIN_TAG = "***LOGIN SESSION";	
   private String email;
@@ -44,39 +39,14 @@ public class LoginActivity extends Activity implements OnClickListener{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.login);
 		
-		
 		init();
-		
-
-//		application = (PlugApplication) getApplicationContext();
-//		setContentView(R.layout.login);		
-//		loginButton.setOnClickListener(this);
-//		if(application.getCurrentUser() == null) {
-//		if(User.getLoggedInUser(this) != null) {
-//  		Log.d(LOGIN_TAG, "***start login activity");
-  		//init();
-//		} else
-//			toHomepage();
-	}
 	
-//	private void setSession(){
-//
-//  }
+	}
 	
 	private void loginHandler(){
   	try {	
-//  		User user = User.login(email);
-  		login = new LoginTask(this, email, password);
+  		login = new LoginTask(this, email, password, this);
   		login.execute();
-  		
-//  		if(user != null) {
-//    		User.setUser(this, user);
-//    		
-//    		User currentUser = User.getLoggedInUser(this);
-//    		Log.i("Logged in", currentUser.getEmail() + " " + currentUser.getId());
-//    		
-//    		toHomepage();
-//  		} 
   	}catch (Exception e) {
   		
   	}
@@ -101,7 +71,6 @@ public class LoginActivity extends Activity implements OnClickListener{
 		Log.d(LOGIN_TAG, "***starting HomeActivity");
   	Intent intent = new Intent(this, HomeActivity.class);
   	startActivity(intent);
-//  	this.finish();
 	}
 
 
@@ -131,16 +100,14 @@ public class LoginActivity extends Activity implements OnClickListener{
 	public class LoginTask extends AsyncTask<Void, Integer, User> {
 		
 		private ProgressDialog dialog;
-		
-//		CustomSpinner
-		
-
+		private SessionCallback callback;
 		private User user;
 		private String email;
 		private String password;
 		private Context context;
 
-		public LoginTask(Context context, String email, String password) {
+		public LoginTask(Context context, String email, String password, SessionCallback callback) {
+			this.callback = callback;
 			this.context = context;
 			this.dialog = new ProgressDialog(context);
 			this.email = email;
@@ -151,7 +118,6 @@ public class LoginActivity extends Activity implements OnClickListener{
 		protected void onPreExecute() {
 			this.dialog.setIndeterminate(true);
 			this.dialog.setIndeterminateDrawable(context.getResources().getDrawable(R.anim.spinner_loading));
-//			this.dialog.setIcon(context.getResources().getDrawable(R.drawable.icon));
 			this.dialog.setMessage("Loggin' in, bro");
 			this.dialog.setProgress(0);
 			this.dialog.show();
@@ -162,7 +128,9 @@ public class LoginActivity extends Activity implements OnClickListener{
 			try {
 				user = User.login(email, password);
       } catch (NullPointerException e) {
+      	return null;
       } catch (IOException e) {
+      	return null;
       }
 		
 			return user;
@@ -203,31 +171,29 @@ public class LoginActivity extends Activity implements OnClickListener{
 
 	
 	private void init() {
+		
+		inputEmail = (EditText) findViewById(R.id.login_username);
+		inputPassword = (EditText) findViewById(R.id.login_password);
+		loginButton = (Button) findViewById(R.id.login_buttonLogin);
+		dev = (CheckBox) findViewById(R.id.dev_checkbox);
+		
 		if(getIntent().getBooleanExtra("EXIT", false)) {
 			finish();
 		} else {
-//		@InjectView(R.id.login_username)  private EditText inputEmail;
-//		@InjectView(R.id.login_password)  private EditText inputPassword;
-//		@InjectView(R.id.login_buttonLogin)  private Button loginButton;	
 		
-  		inputEmail = (EditText) findViewById(R.id.login_username);
-  		inputPassword = (EditText) findViewById(R.id.login_password);
-  		loginButton = (Button) findViewById(R.id.login_buttonLogin);
-  		dev = (CheckBox) findViewById(R.id.dev_checkbox);
-  		
   		dev.setChecked(true);
-  		
-  //		application = (PlugApplication) getApplicationContext();
   		loginButton.setOnClickListener(this);
-//  		dev.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-//  			
-//  		});
   		dev.setOnClickListener(this);
-  
+  		
   		if(User.getLoggedInUser(this) == null) {
     		Log.d(LOGIN_TAG, "***start login activity");
   		} else
   			toHomepage();
 		}
+	}
+	
+	@Override
+	public void onSuccessfullLogin(User user){ 
+		
 	}
 }

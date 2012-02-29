@@ -9,13 +9,11 @@ import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -30,7 +28,6 @@ import android.widget.EditText;
 import android.widget.Gallery;
 import android.widget.ImageView;
 
-import com.googlecode.tesseract.android.TessBaseAPI;
 import com.plug.Action;
 import com.plug.PlugApplication;
 import com.plug.database.model.Note;
@@ -38,7 +35,6 @@ import com.plug.database.model.Notebook;
 import com.plug.database.model.User;
 import com.plug.image.handler.Image;
 import com.plug.main.HomeActivity;
-import com.plug.utils.FileManager;
 
 /**
  * TODO implement menus for editing the title, discarding etc
@@ -274,8 +270,8 @@ public class NoteEditorActivity extends Activity implements OCRCallback {
 		path2 = new ArrayList<String>();
 			
 		projection = new String[]{MediaStore.Images.Thumbnails._ID};
-	    cursor = managedQuery(MediaStore.Images.Thumbnails.EXTERNAL_CONTENT_URI,
-	    projection, null, null, MediaStore.Images.Thumbnails._ID +" ASC");
+    cursor = managedQuery(MediaStore.Images.Thumbnails.EXTERNAL_CONTENT_URI,
+    projection, null, null, MediaStore.Images.Thumbnails._ID +" ASC");
 		
 		currentUser = User.getLoggedInUser(this);
 		noteView=(EditText) findViewById(R.id.note);
@@ -370,52 +366,52 @@ public class NoteEditorActivity extends Activity implements OCRCallback {
 	    } 
 	}
 	
-	public class OCRTask extends AsyncTask<Void, Integer, String> {
-		
-		private ProgressDialog progress;
-		private Context context;
-		private Bitmap imageToProcess;
-		private OCRCallback callback;
-		private TessBaseAPI tesseract; 
-		
-		public OCRTask(Context context, Bitmap bitmap, OCRCallback callback) {
-			this.context = context;
-			this.imageToProcess = bitmap.copy(Bitmap.Config.ARGB_8888, true);;
-			progress = new ProgressDialog(context);
-			this.callback = callback;
-		}
-		
-		@Override
-		protected void onPreExecute() {
-			FileManager manager = new FileManager(context);
-			manager.writeRawToSD(FileManager.TESSERACT_PATH + "eng.traineddata", "tessdata/eng.traineddata");
-			this.progress.setIndeterminate(true);
-			this.progress.setIndeterminateDrawable(context.getResources().getDrawable(R.anim.spinner_loading));
-			this.progress.setMessage("Recognizing using Tesseract, bro.");
-			this.progress.setProgress(0);
-			this.progress.show();
-			tesseract = new TessBaseAPI();
-			tesseract.setDebug(true);
-			tesseract.init(FileManager.STORAGE_PATH, "eng");
-			tesseract.setImage(imageToProcess);
-		}
-
-		@Override
-    protected String doInBackground(Void... params) {
-			String result = tesseract.getUTF8Text();
-	    return result;
-    }
-		
-		protected void onPostExecute(String finish) {
-			if(progress.isShowing())
-				progress.dismiss();
-			
-			callback.onFinishRecognition(finish);
-			
-			tesseract.end();
-		}	
-		
-	}
+//	public class OCRTask extends AsyncTask<Void, Integer, String> {
+//		
+//		private ProgressDialog progress;
+//		private Context context;
+//		private Bitmap imageToProcess;
+//		private OCRCallback callback;
+//		private TessBaseAPI tesseract; 
+//		
+//		public OCRTask(Context context, Bitmap bitmap, OCRCallback callback) {
+//			this.context = context;
+//			this.imageToProcess = bitmap.copy(Bitmap.Config.ARGB_8888, true);;
+//			progress = new ProgressDialog(context);
+//			this.callback = callback;
+//		}
+//		
+//		@Override
+//		protected void onPreExecute() {
+//			FileManager manager = new FileManager(context);
+//			manager.writeRawToSD(FileManager.TESSERACT_PATH + "eng.traineddata", "tessdata/eng.traineddata");
+//			this.progress.setIndeterminate(true);
+//			this.progress.setIndeterminateDrawable(context.getResources().getDrawable(R.anim.spinner_loading));
+//			this.progress.setMessage("Recognizing using Tesseract, bro.");
+//			this.progress.setProgress(0);
+//			this.progress.show();
+//			tesseract = new TessBaseAPI();
+//			tesseract.setDebug(true);
+//			tesseract.init(FileManager.STORAGE_PATH, "eng");
+//			tesseract.setImage(imageToProcess);
+//		}
+//
+//		@Override
+//    protected String doInBackground(Void... params) {
+//			String result = tesseract.getUTF8Text();
+//	    return result;
+//    }
+//		
+//		protected void onPostExecute(String finish) {
+//			if(progress.isShowing())
+//				progress.dismiss();
+//			
+//			callback.onFinishRecognition(finish);
+//			
+//			tesseract.end();
+//		}	
+//		
+//	}
 
 	@Override
   public void onFinishRecognition(String recognizedText) {
