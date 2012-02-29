@@ -74,8 +74,8 @@ public class NoteEditorActivity extends Activity implements OCRCallback {
 	  
 	  private String selectedImagePath;
 	  private ArrayList<String> path2;
-	  private String[] projection;
-	  private Cursor cursor;
+//	  private String[] projection;
+//	  private Cursor cursor;
 	  private WindowManager win;
   
    
@@ -188,12 +188,12 @@ public class NoteEditorActivity extends Activity implements OCRCallback {
 		 if (resultCode == Activity.RESULT_CANCELED) {
 		}
 		 if (requestCode == SELECT_PICTURE) {
-	  		  Bitmap bitmap = null;
+//	  		  Bitmap bitmap = null;
 	          Uri selectedImageUri = data.getData();
 	          selectedImagePath = getPath(selectedImageUri);
 	          path2.add(selectedImagePath);	 
 	          //note.setPaths(selectedImagePath);
-	          bitmap = Image.rescaleBitmap(getApplicationContext(), selectedImageUri, win);	        		         
+//	          bitmap = Image.rescaleBitmap(getApplicationContext(), selectedImageUri, win);	        		         
 	          gallery.setAdapter(new ImageAdapter(getApplicationContext()));
 	     }
 		
@@ -269,9 +269,9 @@ public class NoteEditorActivity extends Activity implements OCRCallback {
 		gallery = (Gallery) findViewById(R.id.gallery_image);
 		path2 = new ArrayList<String>();
 			
-		projection = new String[]{MediaStore.Images.Thumbnails._ID};
-    cursor = managedQuery(MediaStore.Images.Thumbnails.EXTERNAL_CONTENT_URI,
-    projection, null, null, MediaStore.Images.Thumbnails._ID +" ASC");
+//		projection = new String[]{MediaStore.Images.Thumbnails._ID};
+//    cursor = managedQuery(MediaStore.Images.Thumbnails.EXTERNAL_CONTENT_URI,
+//    projection, null, null, MediaStore.Images.Thumbnails._ID +" ASC");
 		
 		currentUser = User.getLoggedInUser(this);
 		noteView=(EditText) findViewById(R.id.note);
@@ -337,11 +337,11 @@ public class NoteEditorActivity extends Activity implements OCRCallback {
 	    
 	 
 	    private Integer[] mImageIds = new Integer[path2.size()];
-	    private ImageView[] mImages;
+//	    private ImageView[] mImages;
 	       
 	    public ImageAdapter(Context c) {
 	       mContext = c;
-	       mImages = new ImageView[mImageIds.length];
+//	       mImages = new ImageView[mImageIds.length];
 	     }
 	    public int getCount() {
 	      return mImageIds.length;
