@@ -4,8 +4,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 import keendy.projects.R;
-import roboguice.activity.RoboActivity;
-import roboguice.inject.InjectView;
+import android.app.Activity;
 import android.content.ContentValues;
 import android.graphics.PixelFormat;
 import android.hardware.Camera;
@@ -26,9 +25,10 @@ import android.widget.LinearLayout;
  * 
  * TODO Implement a better AutoFocus and PictureCallback feature
  */
-public class CameraActivity extends RoboActivity implements SurfaceHolder.Callback {
+public class CameraActivity extends Activity implements SurfaceHolder.Callback {
 
-  @InjectView(R.id.camera_button) private ImageButton mImageButton;
+//  @InjectView(R.id.camera_button) 
+  private ImageButton mImageButton;
   private static final String TAG = "CAMERA ACTIVITY";
 
   private SurfaceView mSurfaceView;
@@ -64,6 +64,7 @@ public class CameraActivity extends RoboActivity implements SurfaceHolder.Callba
 		mSurfaceHolder.addCallback(this);
 		mSurfaceHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
 	
+		mImageButton = (ImageButton) findViewById(R.id.camera_button);
 		mImageButton.setOnClickListener(new OnClickListener() {
 		  @Override
 		  public void onClick(View view) {

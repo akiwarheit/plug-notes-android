@@ -1,6 +1,6 @@
 package com.plug;
 
-import roboguice.application.RoboApplication;
+import android.app.Application;
 
 import com.plug.database.model.Note;
 import com.plug.database.model.Notebook;
@@ -17,7 +17,7 @@ import com.plug.database.provider.UserProvider;
  * 
  */
 
-public class PlugApplication extends RoboApplication {
+public class PlugApplication extends Application {
 			
 	private User currentUser = null;
 	private Note currentNote = null;
