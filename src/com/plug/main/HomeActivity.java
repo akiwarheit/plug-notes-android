@@ -54,7 +54,8 @@ public class HomeActivity extends Activity implements OnClickListener {
 //  		showNotification();
 
 		} else {
-			startActivity(new Intent(this, LoginActivity.class));
+//			startActivity(new Intent(this, LoginActivity.class));
+			finish();
 		}
 	}
 
