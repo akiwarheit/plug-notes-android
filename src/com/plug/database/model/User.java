@@ -9,14 +9,12 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.util.EntityUtils;
 
 import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 import com.plug.PlugApplication;
 import com.plug.database.provider.UserProvider;
-import com.plug.session.LoginActivity;
 import com.plug.web.Response;
 import com.plug.web.WebService;
 
@@ -304,7 +302,6 @@ public class User {
 		
 		
 		provider.db().commit();
-		context.startActivity(new Intent(context, LoginActivity.class));
 	}
 	
 	public static User login(String email, String password) throws NullPointerException, ClientProtocolException, IOException {

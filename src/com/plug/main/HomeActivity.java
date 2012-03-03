@@ -2,10 +2,6 @@ package com.plug.main;
 
 import keendy.projects.R;
 import android.app.Activity;
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -55,39 +51,27 @@ public class HomeActivity extends Activity implements OnClickListener {
 		if(User.getLoggedInUser(this) != null) {
   		setContentView(R.layout.home);
   		init();
-  		showNotification();
-//		User user = User.login("akiwarheit@gmail.com");
-//		User.setUser(this, user);
-//		User loggedInUser = User.getLoggedInUser(this);
-		
-//		Log.i(TAG + "First Login!", user.getEmail());
-//		Log.i(TAG + "First Login!", ""+user.getId());
-		
-//		User user2 = User.login("kjd@cicct.usjr.edu.ph");
-//		User.setUser(this, user2);
-//		User loggedInUser2 = User.getLoggedInUser(this);
-//		
-//		Log.i(TAG + "Second Login!", loggedInUser.getEmail());
-//		Log.i(TAG + "Second Login!", ""+loggedInUser.getId());
+//  		showNotification();
+
 		} else {
 			startActivity(new Intent(this, LoginActivity.class));
 		}
 	}
 
-	private void showNotification() {
-		NotificationManager manager = (NotificationManager) this
-		.getSystemService(Context.NOTIFICATION_SERVICE);
-		
-		Notification notification = new Notification(R.drawable.plug_icon_green_small,
-		"PLUG Notes",System.currentTimeMillis());
-		PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
-		new Intent(this, HomeActivity.class), 0);
-		notification.setLatestEventInfo(this, "PLUG Notes",
-		"by JACK", contentIntent);
-		notification.flags = Notification.FLAG_INSISTENT;
-		manager.notify(0, notification);
-		
-	}
+//	private void showNotification() {
+//		NotificationManager manager = (NotificationManager) this
+//		.getSystemService(Context.NOTIFICATION_SERVICE);
+//		
+//		Notification notification = new Notification(R.drawable.plug_icon_green_small,
+//		"PLUG Notes",System.currentTimeMillis());
+//		PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
+//		new Intent(this, HomeActivity.class), 0);
+//		notification.setLatestEventInfo(this, "PLUG Notes",
+//		"by JACK", contentIntent);
+//		notification.flags = Notification.FLAG_INSISTENT;
+//		manager.notify(0, notification);
+//		
+//	}
 
 	/* Initialize Buttons */
 	private void init() {
@@ -207,6 +191,7 @@ public class HomeActivity extends Activity implements OnClickListener {
   	switch(item.getItemId()) {
   		case R.id.logout:
   			User.logout(this);
+  			finish();
   			break;
   	}
   	

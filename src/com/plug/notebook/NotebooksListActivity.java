@@ -6,7 +6,6 @@ import keendy.projects.R;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.ListActivity;
-import android.app.NotificationManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -46,7 +45,7 @@ public class NotebooksListActivity extends ListActivity implements OnClickListen
 	private String title;
 	private String searchParameter;
 	
-	private NotificationManager notify;
+//	private NotificationManager notify;
 	
 	private ListView listView;
 	

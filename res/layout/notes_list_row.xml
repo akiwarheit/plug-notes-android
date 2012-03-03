@@ -11,10 +11,11 @@
 <!-- 	   android:layout_weight="1" -->
 <!-- 	   android:layout_height="fill_parent"> -->
   <TextView
-    android:layout_width="fill_parent"
-	android:layout_height="25sp"
+	  android:layout_width="fill_parent"
+		android:layout_height="25sp"
 	  android:textSize="20sp"
-	android:id="@+id/list_title_textView" />
+	  android:textColor="@color/black"
+		android:id="@+id/list_title_textView" />
 <!--   </LinearLayout> -->
 </LinearLayout>
 

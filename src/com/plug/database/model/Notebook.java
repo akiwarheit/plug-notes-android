@@ -209,11 +209,16 @@ public class Notebook {
 		NotebooksProvider provider = application.getNotebookProvider();
 		final Notebook parameter = predicate;
 		
+		final Context finalContext = context;
+		
 		Predicate<Notebook> constraint = new Predicate<Notebook>() {
       private static final long serialVersionUID = 1L;
 			@Override
 			public boolean match(Notebook notebook) {
-				return notebook.getDescription().toLowerCase().contains(parameter.getDescription().toLowerCase());
+				if(notebook.getUserId() == User.getLoggedInUser(finalContext).getId() &&notebook.getDescription().toLowerCase().contains(parameter.getDescription().toLowerCase()))
+  				return true;
+				else
+					return false;
 			}
 		};
 		

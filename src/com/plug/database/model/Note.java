@@ -20,7 +20,6 @@ import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 import com.plug.PlugApplication;
 import com.plug.database.provider.NotesProvider;
-import com.plug.image.handler.Image;
 import com.plug.utils.NotesSorter;
 import com.plug.web.Response;
 import com.plug.web.WebService;
@@ -36,7 +35,7 @@ public class Note {
 	@SerializedName("android_updated_at")		private String androidUpdated;	
 	@SerializedName("created_at") 				private String railsCreated;
 	@SerializedName("updated_at")				private String railsUpdated;
-	private List<Image>  images;
+//	private List<Image>  images;
 	private ArrayList<Bitmap> attachedImages;
 	private ArrayList<String> paths;
 	private Notebook notebook;
@@ -288,11 +287,13 @@ public class Note {
 				if(!parameter.getNotebook().equals(null)) {
   				if(note.getNotebook().equals(Notebook.find(finalContext, parameter.getNotebook())))
   					if(note.getTitle().toLowerCase().contains(parameter.getTitle().toLowerCase()))
-    					return true;
+  						if(note.getUserId() == User.getLoggedInUser(finalContext).getId())
+      					return true;
 				} 
 				if(parameter.getNotebook().equals(null)) {
 					if(note.getTitle().toLowerCase().contains(parameter.getTitle().toLowerCase()))
-  					return true;
+						if(note.getUserId() == User.getLoggedInUser(finalContext).getId())
+    					return true;
 				}
   			
   			return false;
@@ -317,6 +318,7 @@ public class Note {
 		NotesProvider provider = plug.getNotesProvider();
 		
 		final String finalPredicate = predicate.toLowerCase();
+		final Context finalContext = context;
 		
 		Predicate<Note> constraint = new Predicate<Note> () {
 			private static final long serialVersionUID = 1L;
@@ -325,7 +327,8 @@ public class Note {
 			public boolean match(Note note) {
 				
         if(note.getTitle().toLowerCase().contains(finalPredicate))
-					return true;
+        	if(note.getUserId() == User.getLoggedInUser(finalContext).getId())
+  					return true;
   			
   			return false;
 			}

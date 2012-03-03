@@ -6,9 +6,6 @@ import java.util.ArrayList;
 
 import keendy.projects.R;
 import android.app.Activity;
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -70,7 +67,7 @@ public class NoteEditorActivity extends Activity implements OCRCallback {
 	  
 	  private User currentUser;
 	  
-	  private NotificationManager manager;
+//	  private NotificationManager manager;
 	  
 	  private String selectedImagePath;
 	  private ArrayList<String> path2;
@@ -89,7 +86,7 @@ public class NoteEditorActivity extends Activity implements OCRCallback {
 		action = intent.getAction();
 
 		init();
-		showNotification();
+//		showNotification();
 		
 		}
   
@@ -134,7 +131,7 @@ public class NoteEditorActivity extends Activity implements OCRCallback {
   
   @Override
   public void onDestroy() {
-		manager.cancelAll();
+//		manager.cancelAll();
 		super.onDestroy();
   }
   
@@ -200,54 +197,9 @@ public class NoteEditorActivity extends Activity implements OCRCallback {
 		if(requestCode == REQUEST_OCR) {
 			if(resultCode == RESULT_OK) {
 				Bitmap x = (Bitmap) data.getExtras().get("data");
-//				String storage = Environment.getExternalStorageDirectory().toString() + "/plug/";
-//				String absoluteStorage = storage + "tessdata/";
-//				
-//				String[] paths = new String[] { storage, absoluteStorage };
-//				
-//				for(String path : paths) {
-//					File dir = new File(path);
-//  				dir.mkdirs();
-//				}
-//			
-//				if (!(new File(storage + "tessdata/eng.traineddata")).exists()) {
-//					try {
-//						
-//						AssetManager manager = getAssets();
-//						InputStream is = manager.open("tessdata/eng.traineddata");
-//						OutputStream os = new FileOutputStream(storage + "tessdata/eng.traineddata");
-//						
-//						byte[] buf = new byte[1024];
-//						int len;
-//						
-//						while((len = is.read(buf)) > 0) {
-//							os.write(buf,0,len);
-//						}
-//						
-//						is.close();
-//						os.close();
-//						
-//						Log.i("SUCCESS: ", "coppied eng.traineddata");
-//						
-//					} catch (IOException e) {
-//						Log.e("FAILED TO COPY: ", e.getMessage());					
-//					}
-//				}
-
 				
 				new OCRTask(this,x,this).execute();
 
-//				TessBaseAPI tesseract = new TessBaseAPI();
-//				tesseract.setDebug(true);
-//				tesseract.init(FileManager.STORAGE_PATH, "eng");
-//				tesseract.setImage(x);
-//				String result = tesseract.getUTF8Text();
-//				
-//				Log.i(TAG, result);
-//				Toast.makeText(this, result, Toast.LENGTH_LONG);
-//				tesseract.end();
-//				
-//				noteView.setText(noteView.getText() + " " + result);
 			}
 		}
 	}
@@ -308,20 +260,20 @@ public class NoteEditorActivity extends Activity implements OCRCallback {
 		}
 	}
 	
-	private void showNotification() {
-		
-		manager = (NotificationManager) this
-		.getSystemService(Context.NOTIFICATION_SERVICE);
-		
-		Notification notification = new Notification(R.drawable.plug_icon_green_small,
-		"PLUG Notes",System.currentTimeMillis());
-		PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
-		new Intent(this, NoteEditorActivity.class), 0);
-		notification.setLatestEventInfo(this, "PLUG Notes",
-		"by JACK", contentIntent);
-		notification.flags = Notification.FLAG_INSISTENT;
-		manager.notify(0, notification);
-}
+//	private void showNotification() {
+//		
+//		manager = (NotificationManager) this
+//		.getSystemService(Context.NOTIFICATION_SERVICE);
+//		
+//		Notification notification = new Notification(R.drawable.plug_icon_green_small,
+//		"PLUG Notes",System.currentTimeMillis());
+//		PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
+//		new Intent(this, NoteEditorActivity.class), 0);
+//		notification.setLatestEventInfo(this, "PLUG Notes",
+//		"by JACK", contentIntent);
+//		notification.flags = Notification.FLAG_INSISTENT;
+//		manager.notify(0, notification);
+//	}
 
 	
 	public String getPath(Uri uri) {
@@ -365,53 +317,6 @@ public class NoteEditorActivity extends Activity implements OCRCallback {
 
 	    } 
 	}
-	
-//	public class OCRTask extends AsyncTask<Void, Integer, String> {
-//		
-//		private ProgressDialog progress;
-//		private Context context;
-//		private Bitmap imageToProcess;
-//		private OCRCallback callback;
-//		private TessBaseAPI tesseract; 
-//		
-//		public OCRTask(Context context, Bitmap bitmap, OCRCallback callback) {
-//			this.context = context;
-//			this.imageToProcess = bitmap.copy(Bitmap.Config.ARGB_8888, true);;
-//			progress = new ProgressDialog(context);
-//			this.callback = callback;
-//		}
-//		
-//		@Override
-//		protected void onPreExecute() {
-//			FileManager manager = new FileManager(context);
-//			manager.writeRawToSD(FileManager.TESSERACT_PATH + "eng.traineddata", "tessdata/eng.traineddata");
-//			this.progress.setIndeterminate(true);
-//			this.progress.setIndeterminateDrawable(context.getResources().getDrawable(R.anim.spinner_loading));
-//			this.progress.setMessage("Recognizing using Tesseract, bro.");
-//			this.progress.setProgress(0);
-//			this.progress.show();
-//			tesseract = new TessBaseAPI();
-//			tesseract.setDebug(true);
-//			tesseract.init(FileManager.STORAGE_PATH, "eng");
-//			tesseract.setImage(imageToProcess);
-//		}
-//
-//		@Override
-//    protected String doInBackground(Void... params) {
-//			String result = tesseract.getUTF8Text();
-//	    return result;
-//    }
-//		
-//		protected void onPostExecute(String finish) {
-//			if(progress.isShowing())
-//				progress.dismiss();
-//			
-//			callback.onFinishRecognition(finish);
-//			
-//			tesseract.end();
-//		}	
-//		
-//	}
 
 	@Override
   public void onFinishRecognition(String recognizedText) {

@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 
-import com.plug.doodle.DoodleView;
 import com.plug.doodle.DrawingActivity;
 
 public class OnShakeAction {

@@ -130,4 +130,8 @@ public class LoginActivity extends Activity implements OnClickListener, SessionC
 		Toast.makeText(this, "Invalid username or pass, bro.", Toast.LENGTH_LONG).show();	
 	}
 	
+  @Override
+  public void onBackPressed() {
+  	this.finish();
+  }
 }
