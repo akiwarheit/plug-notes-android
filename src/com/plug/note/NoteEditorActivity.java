@@ -113,14 +113,14 @@ public class NoteEditorActivity extends Activity implements OCRCallback {
       case R.id.camera_menu:
     	  callCamera();
     	  break;
-      case R.id.note_attach:
-    	  gallery.setVisibility(View.VISIBLE);
-			 Intent intent = new Intent();
-          intent.setType("image/*");
-          intent.setAction(Intent.ACTION_GET_CONTENT);
-          startActivityForResult(Intent.createChooser(intent,
-                  "Select Picture"), SELECT_PICTURE);
-          break;
+//      case R.id.note_attach:
+//    	  gallery.setVisibility(View.VISIBLE);
+//			 Intent intent = new Intent();
+//          intent.setType("image/*");
+//          intent.setAction(Intent.ACTION_GET_CONTENT);
+//          startActivityForResult(Intent.createChooser(intent,
+//                  "Select Picture"), SELECT_PICTURE);
+//          break;
       default:
         return super.onOptionsItemSelected(item);
   		}
