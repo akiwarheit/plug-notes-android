@@ -5,7 +5,7 @@
           android:icon="@drawable/color_grid_4"
           android:title="@string/color" />
   <item android:id="@+id/doodle_undo"
-          android:icon="@drawable/remove_1"
+          android:icon="@drawable/undo_4"
           android:title="@string/undo" />
   <item android:id="@+id/doodle_redo"
           android:icon="@drawable/redo_4"
