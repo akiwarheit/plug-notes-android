@@ -22,6 +22,7 @@ import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.plug.Action;
 import com.plug.PlugApplication;
@@ -30,7 +31,7 @@ import com.plug.database.model.User;
 import com.plug.note.NoteAddTitle;
 import com.plug.note.NotesListActivity;
 
-public class NotebooksListActivity extends ListActivity implements OnClickListener {
+public class NotebooksListActivity extends ListActivity implements OnClickListener,DialogInterface.OnClickListener {
 	
 	private PlugApplication application;
 	
@@ -138,27 +139,7 @@ public class NotebooksListActivity extends ListActivity implements OnClickListen
 		Log.i(TAG, application.getCurrentNotebook().getId()+"");
 		Builder builder = new Builder(this);
 		builder.setTitle(application.getCurrentNotebook().getDescription());
-		builder.setItems(items, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int action) {
-				if(action == OPEN) {
-    		  Intent intent = new Intent();
-      	  intent.setClass(NotebooksListActivity.this, NotesListActivity.class);
-      	  intent.setAction(Action.VIEW_NOTEBOOK_NOTES);
-      	  startActivity(intent);				
-				} else if (action == DELETE) {
-					Notebook.delete(NotebooksListActivity.this, application.getCurrentNotebook());
-					loadList();
-				} else if (action == UPLOAD) {
-					if(!application.getCurrentNotebook().isUploaded())
-						try {
-    					Notebook.upload(NotebooksListActivity.this, application.getCurrentNotebook());
-						} catch (Exception e) {
-							
-						}
-				}
-			}
-		});
+		builder.setItems(items, this);
 		
 		AlertDialog dialog = builder.create();
 		dialog.show();
@@ -209,6 +190,27 @@ public class NotebooksListActivity extends ListActivity implements OnClickListen
 		searchEditText.addTextChangedListener(searchTextWatcher);
 		listView.setOnItemLongClickListener(itemLongClickListener);
 	}
+
+  @Override
+  public void onClick(DialogInterface dialog, int action) {
+    if(action == OPEN) {
+  	  Intent intent = new Intent();
+      intent.setClass(NotebooksListActivity.this, NotesListActivity.class);
+      intent.setAction(Action.VIEW_NOTEBOOK_NOTES);
+      startActivity(intent);				
+  	} else if (action == DELETE) {
+  		Notebook.delete(NotebooksListActivity.this, application.getCurrentNotebook());
+  		loadList();
+  	} else if (action == UPLOAD) {
+  		if(!application.getCurrentNotebook().isUploaded())
+  			try {
+  				Notebook.upload(NotebooksListActivity.this, application.getCurrentNotebook());
+  				Toast.makeText(this, "Upload succeeded!", Toast.LENGTH_LONG).show();
+  			} catch (Exception e) {
+  				Toast.makeText(this, "Failed to upload!", Toast.LENGTH_LONG).show();
+  			}
+  	}   
+  }
 	
 	
 //	public void showNotify(){

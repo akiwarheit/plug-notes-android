@@ -194,25 +194,23 @@ public class NotesListActivity extends ListActivity implements OnClickListener {
 
   @Override
   public void onClick(DialogInterface dialog, int action) {
-    if(this.dialog == dialog) {
-  		if(action == OPEN) {
-  		  Intent intent = new Intent();
-    	  intent.setClass(NotesListActivity.this, NoteEditorActivity.class);
-    	  intent.setAction(Action.UPDATE_NOTE);
-    	  startActivity(intent);				
-  		} else if (action == DELETE) {
-  			Note.delete(NotesListActivity.this, application.getCurrentNote());
-  			loadList();
-  		} else if (action == UPLOAD) {
-  			if(application.getCurrentNote().isUploaded())
-  				try {
-  					Note.upload(NotesListActivity.this, application.getCurrentNote());
-  				  Toast.makeText(this, "Upload succeeded!", Toast.LENGTH_LONG).show();
-  				} catch (Exception e) {
-  				  Toast.makeText(this, "Failed to upload!", Toast.LENGTH_LONG).show();
-  					
-  				}
-  		}   
-    }
+		if(action == OPEN) {
+		  Intent intent = new Intent();
+  	  intent.setClass(NotesListActivity.this, NoteEditorActivity.class);
+  	  intent.setAction(Intent.ACTION_EDIT);
+  	  startActivity(intent);				
+		} else if (action == DELETE) {
+			Note.delete(NotesListActivity.this, application.getCurrentNote());
+			loadList();
+		} else if (action == UPLOAD) {
+			if(!application.getCurrentNote().isUploaded() && application.getCurrentNotebook().isUploaded())
+				try {
+					Note.upload(this, application.getCurrentNote());
+				  Toast.makeText(this, "Upload succeeded!", Toast.LENGTH_LONG).show();
+				} catch (Exception e) {
+				  Toast.makeText(this, "Failed to upload!", Toast.LENGTH_LONG).show();
+					
+				}
+		}   
   }
 }
