@@ -223,7 +223,7 @@ public class Notebook {
 		};
 		
 		NotebooksSorter sort = new NotebooksSorter();
-		sort.sortByAscending(true);
+//		sort.sortByAscending(true);
 		
 		
 //		Query query = provider.db().query();

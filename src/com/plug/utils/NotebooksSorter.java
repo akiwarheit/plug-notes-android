@@ -11,7 +11,7 @@ public class NotebooksSorter implements QueryComparator<Notebook> {
    * 
    */
   private static final long serialVersionUID = 1L;
-	private boolean ascending = true;
+//	private boolean ascending = true;
 	
 	@Override
   public int compare(Notebook n1, Notebook n2) {
@@ -35,7 +35,7 @@ public class NotebooksSorter implements QueryComparator<Notebook> {
 		return result;
 	}
 	
-	public void sortByAscending(boolean ascending) {
-		this.ascending = ascending;
-	}
+//	public void sortByAscending(boolean ascending) {
+//		this.ascending = ascending;
+//	}
 }

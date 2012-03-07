@@ -11,7 +11,7 @@ public class NotesSorter implements QueryComparator<Note> {
    * 
    */
   private static final long serialVersionUID = 1L;
-	private boolean ascending = true;
+//	private boolean ascending = true;
 	
 	@Override
   public int compare(Note note1, Note note2) {
@@ -33,7 +33,7 @@ public class NotesSorter implements QueryComparator<Note> {
 		return result;
 	}
 	
-	public void sortByAscending(boolean ascending) {
-		this.ascending = ascending;
-	}
+//	public void sortByAscending(boolean ascending) {
+//		this.ascending = ascending;
+//	}
 }

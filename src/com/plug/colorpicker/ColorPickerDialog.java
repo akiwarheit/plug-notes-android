@@ -2,7 +2,12 @@ package com.plug.colorpicker;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.graphics.*;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.RectF;
+import android.graphics.Shader;
+import android.graphics.SweepGradient;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -80,18 +85,18 @@ public class ColorPickerDialog extends Dialog {
         private static final int CENTER_Y = 100;
         private static final int CENTER_RADIUS = 32;
 
-        private int floatToByte(float x) {
-            int n = Math.round(x);
-            return n;
-        }
-        private int pinToByte(int n) {
-            if (n < 0) {
-                n = 0;
-            } else if (n > 255) {
-                n = 255;
-            }
-            return n;
-        }
+//        private int floatToByte(float x) {
+//            int n = Math.round(x);
+//            return n;
+//        }
+//        private int pinToByte(int n) {
+//            if (n < 0) {
+//                n = 0;
+//            } else if (n > 255) {
+//                n = 255;
+//            }
+//            return n;
+//        }
 
         private int ave(int s, int d, float p) {
             return s + Math.round(p * (d - s));
@@ -120,30 +125,30 @@ public class ColorPickerDialog extends Dialog {
             return Color.argb(a, r, g, b);
         }
 
-        private int rotateColor(int color, float rad) {
-            float deg = rad * 180 / 3.1415927f;
-            int r = Color.red(color);
-            int g = Color.green(color);
-            int b = Color.blue(color);
-
-            ColorMatrix cm = new ColorMatrix();
-            ColorMatrix tmp = new ColorMatrix();
-
-            cm.setRGB2YUV();
-            tmp.setRotate(0, deg);
-            cm.postConcat(tmp);
-            tmp.setYUV2RGB();
-            cm.postConcat(tmp);
-
-            final float[] a = cm.getArray();
-
-            int ir = floatToByte(a[0] * r +  a[1] * g +  a[2] * b);
-            int ig = floatToByte(a[5] * r +  a[6] * g +  a[7] * b);
-            int ib = floatToByte(a[10] * r + a[11] * g + a[12] * b);
-
-            return Color.argb(Color.alpha(color), pinToByte(ir),
-                              pinToByte(ig), pinToByte(ib));
-        }
+//        private int rotateColor(int color, float rad) {
+//            float deg = rad * 180 / 3.1415927f;
+//            int r = Color.red(color);
+//            int g = Color.green(color);
+//            int b = Color.blue(color);
+//
+//            ColorMatrix cm = new ColorMatrix();
+//            ColorMatrix tmp = new ColorMatrix();
+//
+//            cm.setRGB2YUV();
+//            tmp.setRotate(0, deg);
+//            cm.postConcat(tmp);
+//            tmp.setYUV2RGB();
+//            cm.postConcat(tmp);
+//
+//            final float[] a = cm.getArray();
+//
+//            int ir = floatToByte(a[0] * r +  a[1] * g +  a[2] * b);
+//            int ig = floatToByte(a[5] * r +  a[6] * g +  a[7] * b);
+//            int ib = floatToByte(a[10] * r + a[11] * g + a[12] * b);
+//
+//            return Color.argb(Color.alpha(color), pinToByte(ir),
+//                              pinToByte(ig), pinToByte(ib));
+//        }
 
         private static final float PI = 3.1415926f;
 

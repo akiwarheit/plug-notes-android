@@ -16,12 +16,12 @@ public class Image {
 	
 	@SerializedName("image")	private long id;
 	private Bitmap bitmap;
-	private Uri uri;
-	private String path;
+//	private Uri uri;
+//	private String path;
 	
 	public Image(Bitmap bitmap, Uri uri) {
 		this.bitmap = bitmap;
-		this.uri = uri;
+//		this.uri = uri;
 	}
 	
 	public Image(Bitmap bitmap) {
@@ -29,7 +29,7 @@ public class Image {
 	}
 	
 	public Image(Uri uri) {
-		this.uri = uri;
+//		this.uri = uri;
 	}
 	
 	public long getId() {
