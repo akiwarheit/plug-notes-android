@@ -100,8 +100,7 @@ public class NotebooksListActivity extends ListActivity implements OnClickListen
   	
   	MenuInflater inflater = getMenuInflater();
   	inflater.inflate(R.menu.notebooks_list_menu, menu);
-  	
-		return true;
+  	return true;
 	}
   
   @Override

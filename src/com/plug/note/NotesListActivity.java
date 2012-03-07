@@ -45,7 +45,7 @@ public class NotesListActivity extends ListActivity implements OnClickListener, 
  	private final int OPEN = 0, UPLOAD = 1, DELETE = 2;	
  	
   private String searchParameter;
-  private TextWatcher searchTextWatcher;
+//  private TextWatcher searchTextWatcher;
   private EditText searchEditText;
   private String action;
   
