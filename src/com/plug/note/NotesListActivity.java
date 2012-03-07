@@ -7,6 +7,7 @@ import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.ListActivity;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -20,13 +21,14 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.plug.Action;
 import com.plug.PlugApplication;
 import com.plug.database.model.Note;
 import com.plug.database.model.Notebook;
 
-public class NotesListActivity extends ListActivity{
+public class NotesListActivity extends ListActivity implements OnClickListener {
 
 	private PlugApplication application;
 	
@@ -47,6 +49,8 @@ public class NotesListActivity extends ListActivity{
   private EditText searchEditText;
   private String action;
   
+  AlertDialog dialog;
+  
   @Override
   protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -62,13 +66,7 @@ public class NotesListActivity extends ListActivity{
   protected void onListItemClick(ListView l, View v, int position, long id) {
     super.onListItemClick(l, v, position, id);
     Note note = notes.get(position);
-    
-//    try {
-//      Note.upload(this, note);
-//    } catch (Exception e) {
-//    	Log.e("Exception", ""+e.getLocalizedMessage());
-//    }
-    
+   
     Log.i(TAG, ""+note.getTitle());
     Log.i(TAG, ""+note.getContent());
     application.setCurrentNote(note);
@@ -187,29 +185,34 @@ public class NotesListActivity extends ListActivity{
 		Log.i(TAG, application.getCurrentNote().getId()+"");
 		Builder builder = new Builder(this);
 		builder.setTitle(application.getCurrentNote().getTitle());
-		builder.setItems(items, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int action) {
-				if(action == OPEN) {
-    		  Intent intent = new Intent();
-      	  intent.setClass(NotesListActivity.this, NoteEditorActivity.class);
-      	  intent.setAction(Action.UPDATE_NOTE);
-      	  startActivity(intent);				
-				} else if (action == DELETE) {
-					Note.delete(NotesListActivity.this, application.getCurrentNote());
-					loadList();
-				} else if (action == UPLOAD) {
-					if(!application.getCurrentNote().isUploaded())
-						try {
-    					Note.upload(NotesListActivity.this, application.getCurrentNote());
-						} catch (Exception e) {
-							
-						}
-				}
-			}
-		});
+		builder.setItems(items, this);
 		
-		AlertDialog dialog = builder.create();
+		dialog = builder.create();
 		dialog.show();
 	}
+
+
+  @Override
+  public void onClick(DialogInterface dialog, int action) {
+    if(this.dialog == dialog) {
+  		if(action == OPEN) {
+  		  Intent intent = new Intent();
+    	  intent.setClass(NotesListActivity.this, NoteEditorActivity.class);
+    	  intent.setAction(Action.UPDATE_NOTE);
+    	  startActivity(intent);				
+  		} else if (action == DELETE) {
+  			Note.delete(NotesListActivity.this, application.getCurrentNote());
+  			loadList();
+  		} else if (action == UPLOAD) {
+  			if(application.getCurrentNote().isUploaded())
+  				try {
+  					Note.upload(NotesListActivity.this, application.getCurrentNote());
+  				  Toast.makeText(this, "Upload succeeded!", Toast.LENGTH_LONG).show();
+  				} catch (Exception e) {
+  				  Toast.makeText(this, "Failed to upload!", Toast.LENGTH_LONG).show();
+  					
+  				}
+  		}   
+    }
+  }
 }
