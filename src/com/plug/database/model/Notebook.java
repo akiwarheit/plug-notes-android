@@ -28,328 +28,351 @@ import com.plug.web.Response;
 import com.plug.web.WebService;
 
 public class Notebook {
-	
-	public static String DESCRIPTION = "description";
-	
-	@SerializedName("id") 												private long id;
-	@SerializedName("user_id") 										private long userId;
-	@SerializedName("description")								private String description;
-	@SerializedName("created_at") 								private String railsCreated;
-	@SerializedName("updated_at")									private String railsUpdated;	
-	@SerializedName("created_android") 						private String androidCreated;
-	@SerializedName("updated_android")						private String androidUpdated;	
-	private List<Note> notes;
-	private boolean isUploaded = false;
-
-	public Notebook() {
-  	Date date = new Date(System.currentTimeMillis()); 
-	  this.androidCreated = date.toString();
-	  this.androidUpdated = date.toString();	
-	}
-	
-	public Notebook(String description) {
-		this.description = description;
-		Date date = new Date(System.currentTimeMillis()); 
-	  this.androidCreated = date.toString();
-	  this.androidUpdated = date.toString();
-		notes = new ArrayList<Note>();
-	}
-	
-	public Notebook(String description, User user) {
-		this.description = description;
-		Date date = new Date(System.currentTimeMillis()); 
-	  this.androidCreated = date.toString();
-	  this.androidUpdated = date.toString();
-		notes = new ArrayList<Note>();
-		
-		this.userId = user.getId();
-	}
-	
-	public Notebook(String description, List<Note> notes) {
-		this.description = description;
-		Date date = new Date(System.currentTimeMillis()); 
-	  this.androidCreated = date.toString();
-	  this.androidUpdated = date.toString();
-		this.notes = notes;
-	}
-	
-	public long getUserId() {
-  	return userId;
+  
+  public static String DESCRIPTION = "description";
+  
+  @SerializedName("id")
+  private long id;
+  @SerializedName("user_id")
+  private long userId;
+  @SerializedName("description")
+  private String description;
+  @SerializedName("created_at")
+  private String railsCreated;
+  @SerializedName("updated_at")
+  private String railsUpdated;
+  @SerializedName("created_android")
+  private String androidCreated;
+  @SerializedName("updated_android")
+  private String androidUpdated;
+  private List<Note> notes;
+  private boolean isUploaded = false;
+  
+  public Notebook() {
+    Date date = new Date(System.currentTimeMillis());
+    this.androidCreated = date.toString();
+    this.androidUpdated = date.toString();
   }
-
-	public void setUserId(long userId) {
-  	this.userId = userId;
+  
+  public Notebook(String description) {
+    this.description = description;
+    Date date = new Date(System.currentTimeMillis());
+    this.androidCreated = date.toString();
+    this.androidUpdated = date.toString();
+    notes = new ArrayList<Note>();
   }
-
-	public void setAndroidCreated(String androidCreated) {
-  	this.androidCreated = androidCreated;
+  
+  public Notebook(String description, User user) {
+    this.description = description;
+    Date date = new Date(System.currentTimeMillis());
+    this.androidCreated = date.toString();
+    this.androidUpdated = date.toString();
+    notes = new ArrayList<Note>();
+    
+    this.userId = user.getId();
   }
-
-	public void setAndroidUpdated(String androidUpdated) {
-  	this.androidUpdated = androidUpdated;
+  
+  public Notebook(String description, List<Note> notes) {
+    this.description = description;
+    Date date = new Date(System.currentTimeMillis());
+    this.androidCreated = date.toString();
+    this.androidUpdated = date.toString();
+    this.notes = notes;
   }
-
-	public String getDescription() {
-		return description;
-	}
-	
-	public void setDescription(String description) {
-		this.description = description;
-	}
-	
-	public List<Note> getNotes() {
-		return notes;
-	}
-	
-	public Date getAndroidUpdated() {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd k:m:s");
-		Date date = null;
-		try {
-	    date = dateFormat.parse(androidUpdated);
+  
+  public long getUserId() {
+    return userId;
+  }
+  
+  public void setUserId(long userId) {
+    this.userId = userId;
+  }
+  
+  public void setAndroidCreated(String androidCreated) {
+    this.androidCreated = androidCreated;
+  }
+  
+  public void setAndroidUpdated(String androidUpdated) {
+    this.androidUpdated = androidUpdated;
+  }
+  
+  public String getDescription() {
+    return description;
+  }
+  
+  public void setDescription(String description) {
+    this.description = description;
+  }
+  
+  public List<Note> getNotes() {
+    return notes;
+  }
+  
+  public Date getAndroidUpdated() {
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd k:m:s");
+    Date date = null;
+    try {
+      date = dateFormat.parse(androidUpdated);
     } catch (ParseException e) {
-	    // TODO Auto-generated catch block
-	    e.printStackTrace();
+      // TODO Auto-generated catch block
+      e.printStackTrace();
     }
-    if(date!=null)
+    if (date != null)
       Log.i("Date Parser", date.toString());
     else
-    	Log.e("Date Parser", "NULL");
-  	return date;
+      Log.e("Date Parser", "NULL");
+    return date;
   }
-
-	public void setAndroidUpdated(Date androidUpdated) {
-  	this.androidUpdated = androidUpdated.toString();
+  
+  public void setAndroidUpdated(Date androidUpdated) {
+    this.androidUpdated = androidUpdated.toString();
   }
-
-	public void setRailsCreated(String railsCreated) {
-  	this.railsCreated = railsCreated;
+  
+  public void setRailsCreated(String railsCreated) {
+    this.railsCreated = railsCreated;
   }
-
-	public void setRailsUpdated(String railsUpdated) {
-  	this.railsUpdated = railsUpdated;
+  
+  public void setRailsUpdated(String railsUpdated) {
+    this.railsUpdated = railsUpdated;
   }
-
-	public void setAndroidCreated(Date androidCreated) {
-  	this.androidCreated = androidCreated.toString();
+  
+  public void setAndroidCreated(Date androidCreated) {
+    this.androidCreated = androidCreated.toString();
   }
-
-	public String getRailsCreated() {
-  	return railsCreated;
+  
+  public String getRailsCreated() {
+    return railsCreated;
   }
-
-	public String getRailsUpdated() {
-  	return railsUpdated;
+  
+  public String getRailsUpdated() {
+    return railsUpdated;
   }
-
-	public Date getAndroidCreated() {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd k:m:s");
-		Date date = null;
-		try {
-	    date = dateFormat.parse(androidCreated);
+  
+  public Date getAndroidCreated() {
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd k:m:s");
+    Date date = null;
+    try {
+      date = dateFormat.parse(androidCreated);
     } catch (ParseException e) {
-	    // TODO Auto-generated catch block
-	    e.printStackTrace();
+      // TODO Auto-generated catch block
+      e.printStackTrace();
     }
-  	return date;
+    return date;
   }
-
-	public void setNotes(List<Note> notes) {
-		this.notes = notes;
-	}
-	
-	public boolean isUploaded() {
-  	return isUploaded;
+  
+  public void setNotes(List<Note> notes) {
+    this.notes = notes;
   }
-
-	public void setUploaded(boolean isUploaded) {
-  	this.isUploaded = isUploaded;
+  
+  public boolean isUploaded() {
+    return isUploaded;
   }
-
-	public long getId() {
-  	return id;
+  
+  public void setUploaded(boolean isUploaded) {
+    this.isUploaded = isUploaded;
   }
-
-	public void setId(long id) {
-  	this.id = id;
+  
+  public long getId() {
+    return id;
   }
-
-	public List<Note> loadNotes(Context context) {
-		PlugApplication application = (PlugApplication) context.getApplicationContext();
-		NotesProvider provider = application.getNotesProvider();
-		Note predicate = new Note();
-		predicate.setNotebook(this);
-		List<Note> queriedNotes = provider.db().queryByExample(predicate);
-		this.notes = queriedNotes;
-		
-		return notes;
-	}
-	
-	public static void save(Context context, Notebook notebook) {
-		PlugApplication application = (PlugApplication) context.getApplicationContext();
-		NotebooksProvider provider = application.getNotebookProvider();
-		provider.store(notebook);
-		provider.db().commit();
-	}
-	
-	public static Notebook find(Context context, Notebook notebook) {
-		PlugApplication application = (PlugApplication) context.getApplicationContext();
-		NotebooksProvider provider = application.getNotebookProvider();
-		return (Notebook) provider.db().queryByExample(notebook).next();
-	}
-	
-	public static void delete(Context context, Notebook notebook) {
-		PlugApplication application = (PlugApplication) context.getApplicationContext();
-		NotebooksProvider provider = application.getNotebookProvider();
-		provider.delete(notebook);
-		provider.db().commit();
-	}
-	
-	public static List<Notebook> query(Context context, Notebook predicate) {
-		PlugApplication application = (PlugApplication) context.getApplicationContext();
-		NotebooksProvider provider = application.getNotebookProvider();
-		final Notebook parameter = predicate;
-		
-		final Context finalContext = context;
-		
-		Predicate<Notebook> constraint = new Predicate<Notebook>() {
+  
+  public void setId(long id) {
+    this.id = id;
+  }
+  
+  public List<Note> loadNotes(Context context) {
+    PlugApplication application = (PlugApplication) context
+        .getApplicationContext();
+    NotesProvider provider = application.getNotesProvider();
+    Note predicate = new Note();
+    predicate.setNotebook(this);
+    List<Note> queriedNotes = provider.db().queryByExample(predicate);
+    this.notes = queriedNotes;
+    
+    return notes;
+  }
+  
+  public static void save(Context context, Notebook notebook) {
+    PlugApplication application = (PlugApplication) context
+        .getApplicationContext();
+    NotebooksProvider provider = application.getNotebookProvider();
+    provider.store(notebook);
+    provider.db().commit();
+  }
+  
+  public static Notebook find(Context context, Notebook notebook) {
+    PlugApplication application = (PlugApplication) context
+        .getApplicationContext();
+    NotebooksProvider provider = application.getNotebookProvider();
+    return (Notebook) provider.db().queryByExample(notebook).next();
+  }
+  
+  public static void delete(Context context, Notebook notebook) {
+    PlugApplication application = (PlugApplication) context
+        .getApplicationContext();
+    NotebooksProvider provider = application.getNotebookProvider();
+    provider.delete(notebook);
+    provider.db().commit();
+  }
+  
+  public static List<Notebook> query(Context context, Notebook predicate) {
+    PlugApplication application = (PlugApplication) context
+        .getApplicationContext();
+    NotebooksProvider provider = application.getNotebookProvider();
+    final Notebook parameter = predicate;
+    
+    final Context finalContext = context;
+    
+    Predicate<Notebook> constraint = new Predicate<Notebook>() {
       private static final long serialVersionUID = 1L;
-			@Override
-			public boolean match(Notebook notebook) {
-				if(notebook.getUserId() == User.getLoggedInUser(finalContext).getId() &&notebook.getDescription().toLowerCase().contains(parameter.getDescription().toLowerCase()))
-  				return true;
-				else
-					return false;
-			}
-		};
-		
-		NotebooksSorter sort = new NotebooksSorter();
-//		sort.sortByAscending(true);
-		
-		
-//		Query query = provider.db().query();
-//		query.descend(Notebook.DESCRIPTION).orderAscending();
-//		query.constrain(constraint);
-		List<Notebook> results = provider.db().query(constraint, sort);
-//		List<Notebook> results = provider.db().query(new Predicate<Notebook>() {
-//			
-//			/**
-//			 * 
-//			 */
-//			private static final long serialVersionUID = 1L;
-//
-//			@Override
-//			public boolean match(Notebook notebook) {
-//				return notebook.getDescription().toLowerCase().contains(parameter.getDescription().toLowerCase());
-//			}
-//		}); 
-		return results;
-	}
-	
-	public static List<Notebook> query(Context context, String parameter) {
-		PlugApplication application = (PlugApplication) context.getApplicationContext();
-		NotebooksProvider provider = application.getNotebookProvider();
-		
-		final String lowerCaseParameter = parameter.toLowerCase();
-		
-		Predicate<Notebook> predicate = new Predicate<Notebook>() {
-			/**
+      
+      @Override
+      public boolean match(Notebook notebook) {
+        if (notebook.getUserId() == User.getLoggedInUser(finalContext).getId()
+            && notebook.getDescription().toLowerCase()
+                .contains(parameter.getDescription().toLowerCase()))
+          return true;
+        else
+          return false;
+      }
+    };
+    
+    NotebooksSorter sort = new NotebooksSorter();
+    // sort.sortByAscending(true);
+    
+    // Query query = provider.db().query();
+    // query.descend(Notebook.DESCRIPTION).orderAscending();
+    // query.constrain(constraint);
+    List<Notebook> results = provider.db().query(constraint, sort);
+    // List<Notebook> results = provider.db().query(new Predicate<Notebook>() {
+    //
+    // /**
+    // *
+    // */
+    // private static final long serialVersionUID = 1L;
+    //
+    // @Override
+    // public boolean match(Notebook notebook) {
+    // return
+    // notebook.getDescription().toLowerCase().contains(parameter.getDescription().toLowerCase());
+    // }
+    // });
+    return results;
+  }
+  
+  public static List<Notebook> query(Context context, String parameter) {
+    PlugApplication application = (PlugApplication) context
+        .getApplicationContext();
+    NotebooksProvider provider = application.getNotebookProvider();
+    
+    final String lowerCaseParameter = parameter.toLowerCase();
+    
+    Predicate<Notebook> predicate = new Predicate<Notebook>() {
+      /**
 			 * 
 			 */
-			private static final long serialVersionUID = 1L;
-
-			@Override
-			public boolean match(Notebook notebook) {
-				return notebook.getDescription().toLowerCase().contains(lowerCaseParameter);
-			}
-			
-		};
-		
-		
-		Query query = provider.db().query();
-		query.descend(Notebook.DESCRIPTION).orderAscending();
-		query.constrain(predicate);
-		List<Notebook> results = query.execute();
-//		.query(new Predicate<Notebook>() {
-//
-//			/**
-//			 * 
-//			 */
-//			private static final long serialVersionUID = 1L;
-//
-//			@Override
-//			public boolean match(Notebook notebook) {
-//				return notebook.getDescription().toLowerCase().contains(lowerCaseParameter);
-//			}
-//			
-//		});
-		
-//		List<Notebook> results = provider.db().query(new Predicate<Notebook>() {
-//
-//			/**
-//			 * 
-//			 */
-//			private static final long serialVersionUID = 1L;
-//
-//			@Override
-//			public boolean match(Notebook notebook) {
-//				return notebook.getDescription().toLowerCase().contains(lowerCaseParameter);
-//			}
-//			
-//		}); 
-		return results;
-	}
-	
-	public static List<Notebook> all(Context context) {
-  	PlugApplication plug = (PlugApplication) context.getApplicationContext();
-		NotebooksProvider provider = plug.getNotebookProvider();	
-		List<Notebook> result = provider.findAll();
-		return  result;
-	}
-	
-	public static void update(Context context, Notebook notebook, Notebook updatedNotebook) {
-		Notebook currentNotebook = Notebook.find(context, notebook);
-		Date date = new Date(System.currentTimeMillis()); 
-		currentNotebook.setId(updatedNotebook.getId());
-		currentNotebook.setUserId(updatedNotebook.getUserId());
-		currentNotebook.setDescription(updatedNotebook.getDescription());
-		currentNotebook.setAndroidUpdated(date);
-		currentNotebook.setRailsCreated(updatedNotebook.getRailsCreated());
-		currentNotebook.setRailsUpdated(updatedNotebook.getRailsUpdated());
-		currentNotebook.setUploaded(updatedNotebook.isUploaded);
-		Notebook.save(context, currentNotebook);
-	}
-	
-	public static void upload(Context context, Notebook notebook) throws ClientProtocolException, IOException {
-//		notebook.getAndroidCreated();
-		MultipartEntity entity = new MultipartEntity();
-		HttpResponse response;
-		Notebook updatedNotebook = new Notebook();
-		Response container = new Response();
-		Gson gson = new Gson();
+      private static final long serialVersionUID = 1L;
+      
+      @Override
+      public boolean match(Notebook notebook) {
+        return notebook.getDescription().toLowerCase()
+            .contains(lowerCaseParameter);
+      }
+      
+    };
+    
+    Query query = provider.db().query();
+    query.descend(Notebook.DESCRIPTION).orderAscending();
+    query.constrain(predicate);
+    List<Notebook> results = query.execute();
+    // .query(new Predicate<Notebook>() {
+    //
+    // /**
+    // *
+    // */
+    // private static final long serialVersionUID = 1L;
+    //
+    // @Override
+    // public boolean match(Notebook notebook) {
+    // return
+    // notebook.getDescription().toLowerCase().contains(lowerCaseParameter);
+    // }
+    //
+    // });
+    
+    // List<Notebook> results = provider.db().query(new Predicate<Notebook>() {
+    //
+    // /**
+    // *
+    // */
+    // private static final long serialVersionUID = 1L;
+    //
+    // @Override
+    // public boolean match(Notebook notebook) {
+    // return
+    // notebook.getDescription().toLowerCase().contains(lowerCaseParameter);
+    // }
+    //
+    // });
+    return results;
+  }
+  
+  public static List<Notebook> all(Context context) {
+    PlugApplication plug = (PlugApplication) context.getApplicationContext();
+    NotebooksProvider provider = plug.getNotebookProvider();
+    List<Notebook> result = provider.findAll();
+    return result;
+  }
+  
+  public static void update(Context context, Notebook notebook,
+      Notebook updatedNotebook) {
+    Notebook currentNotebook = Notebook.find(context, notebook);
+    Date date = new Date(System.currentTimeMillis());
+    currentNotebook.setId(updatedNotebook.getId());
+    currentNotebook.setUserId(updatedNotebook.getUserId());
+    currentNotebook.setDescription(updatedNotebook.getDescription());
+    currentNotebook.setAndroidUpdated(date);
+    currentNotebook.setRailsCreated(updatedNotebook.getRailsCreated());
+    currentNotebook.setRailsUpdated(updatedNotebook.getRailsUpdated());
+    currentNotebook.setUploaded(updatedNotebook.isUploaded);
+    Notebook.save(context, currentNotebook);
+  }
+  
+  public static void upload(Context context, Notebook notebook)
+      throws ClientProtocolException, IOException {
+    // notebook.getAndroidCreated();
+    MultipartEntity entity = new MultipartEntity();
+    HttpResponse response;
+    Notebook updatedNotebook = new Notebook();
+    Response container = new Response();
+    Gson gson = new Gson();
     StringBody description = new StringBody(notebook.getDescription());
-    StringBody user = new StringBody(""+notebook.getUserId());
+    StringBody user = new StringBody("" + notebook.getUserId());
     StringBody format = new StringBody("json");
-//	    StringBody androidCreated = new StringBody(notebook.getAndroidCreated().toString());
-//	    StringBody androidUpdated = new StringBody(notebook.getAndroidUpdated().toString());
-		entity.addPart("description", description);
-		entity.addPart("user_id", user);
-		entity.addPart("format", format);
-//  		entity.addPart("android_created", androidCreated);
-//  		entity.addPart("android_updated", androidUpdated);
-		response = WebService.postRequest(entity, WebService.POST_NOTEBOOK_URL);
-		String json = EntityUtils.toString(response.getEntity());
-		Log.i("Note Uploader", json);
-		container = gson.fromJson(json, Response.class);
-		updatedNotebook = container.notebook;
-		if(updatedNotebook != null) {
-			Log.i("Notebook ID", ""+updatedNotebook.getId());
-			Log.i("Notebook userID", ""+updatedNotebook.getUserId());
-			Log.i("Notebook Title", ""+updatedNotebook.getDescription());
-			Log.i("Notebook CreatedAt", ""+updatedNotebook.getRailsCreated());
-			Log.i("Notebook UpdatedAt", ""+updatedNotebook.getRailsUpdated());
-			updatedNotebook.setUploaded(true);
-			Notebook.update(context, Notebook.find(context, notebook), updatedNotebook);
-		}
-	}
-
+    // StringBody androidCreated = new
+    // StringBody(notebook.getAndroidCreated().toString());
+    // StringBody androidUpdated = new
+    // StringBody(notebook.getAndroidUpdated().toString());
+    entity.addPart("description", description);
+    entity.addPart("user_id", user);
+    entity.addPart("format", format);
+    // entity.addPart("android_created", androidCreated);
+    // entity.addPart("android_updated", androidUpdated);
+    response = WebService.postRequest(entity, WebService.POST_NOTEBOOK_URL);
+    String json = EntityUtils.toString(response.getEntity());
+    Log.i("Note Uploader", json);
+    container = gson.fromJson(json, Response.class);
+    updatedNotebook = container.notebook;
+    if (updatedNotebook != null) {
+      Log.i("Notebook ID", "" + updatedNotebook.getId());
+      Log.i("Notebook userID", "" + updatedNotebook.getUserId());
+      Log.i("Notebook Title", "" + updatedNotebook.getDescription());
+      Log.i("Notebook CreatedAt", "" + updatedNotebook.getRailsCreated());
+      Log.i("Notebook UpdatedAt", "" + updatedNotebook.getRailsUpdated());
+      updatedNotebook.setUploaded(true);
+      Notebook.update(context, Notebook.find(context, notebook),
+          updatedNotebook);
+    }
+  }
+  
 }

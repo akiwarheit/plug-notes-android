@@ -44,7 +44,7 @@ public class HomeActivity extends Activity implements OnClickListener {
 	private Button allnotes;
 	
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
+  public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		application = (PlugApplication) this.getApplicationContext();
 //		setContentView(R.layout.home);
