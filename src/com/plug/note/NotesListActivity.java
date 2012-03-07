@@ -28,7 +28,7 @@ import com.plug.PlugApplication;
 import com.plug.database.model.Note;
 import com.plug.database.model.Notebook;
 
-public class NotesListActivity extends ListActivity implements OnClickListener {
+public class NotesListActivity extends ListActivity implements OnClickListener, TextWatcher, OnItemLongClickListener {
 
 	private PlugApplication application;
 	
@@ -40,7 +40,7 @@ public class NotesListActivity extends ListActivity implements OnClickListener {
   private Note predicate = new Note("");
   
   private ListView listView;
- 	private OnItemLongClickListener itemLongClickListener; 
+// 	private OnItemLongClickListener itemLongClickListener; 
  	private final CharSequence[] items = {"Open","Upload", "Delete"};	
  	private final int OPEN = 0, UPLOAD = 1, DELETE = 2;	
  	
@@ -108,38 +108,38 @@ public class NotesListActivity extends ListActivity implements OnClickListener {
 		
 		listView = getListView();
 		
-		itemLongClickListener = new OnItemLongClickListener() {
-			@Override
-			public boolean onItemLongClick(AdapterView<?> arg0, View arg1, int arg2,
-					long arg3) {
-				application.setCurrentNote(notes.get(arg2));
-				showDialog();
-				Log.i(TAG, application.getCurrentNote().getTitle());
-				return true;
-			}
-			
-		};
+//		itemLongClickListener = new OnItemLongClickListener() {
+//			@Override
+//			public boolean onItemLongClick(AdapterView<?> arg0, View arg1, int arg2,
+//					long arg3) {
+//				application.setCurrentNote(notes.get(arg2));
+//				showDialog();
+//				Log.i(TAG, application.getCurrentNote().getTitle());
+//				return true;
+//			}
+//			
+//		};
 		
-		searchTextWatcher = new TextWatcher() {
-			@Override
-			public void afterTextChanged(Editable arg0) {
-				searchParameter = searchEditText.getText().toString();
-				predicate.setTitle(searchParameter);
-				loadList();
-			}
-
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count,
-					int after) {
-			}
-
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count) {
-			}
-		};
+//		searchTextWatcher = new TextWatcher() {
+//			@Override
+//			public void afterTextChanged(Editable arg0) {
+//				searchParameter = searchEditText.getText().toString();
+//				predicate.setTitle(searchParameter);
+//				loadList();
+//			}
+//
+//			@Override
+//			public void beforeTextChanged(CharSequence s, int start, int count,
+//					int after) {
+//			}
+//
+//			@Override
+//			public void onTextChanged(CharSequence s, int start, int before, int count) {
+//			}
+//		};
 		
-		listView.setOnItemLongClickListener(itemLongClickListener);
-		searchEditText.addTextChangedListener(searchTextWatcher);
+		listView.setOnItemLongClickListener(this);
+		searchEditText.addTextChangedListener(this);
   }
   
   @Override
@@ -173,6 +173,7 @@ public class NotesListActivity extends ListActivity implements OnClickListener {
     }
 		return true;
 	}
+  
 	private void showDialog() {
 		Log.i(TAG, application.getCurrentNote().isUploaded() ? "true" : "false");
 		
@@ -213,4 +214,29 @@ public class NotesListActivity extends ListActivity implements OnClickListener {
 				}
 		}   
   }
+
+	@Override
+	public void afterTextChanged(Editable arg0) {
+		searchParameter = searchEditText.getText().toString();
+		predicate.setTitle(searchParameter);
+		loadList();
+	}
+
+	@Override
+	public void beforeTextChanged(CharSequence s, int start, int count,
+			int after) {
+	}
+
+	@Override
+	public void onTextChanged(CharSequence s, int start, int before, int count) {
+	}
+	
+	@Override
+	public boolean onItemLongClick(AdapterView<?> arg0, View arg1, int arg2,
+			long arg3) {
+		application.setCurrentNote(notes.get(arg2));
+		showDialog();
+		Log.i(TAG, application.getCurrentNote().getTitle());
+		return true;
+	}
 }
